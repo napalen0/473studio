@@ -505,6 +505,9 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     border-radius: 30px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .iphone-screen img {
