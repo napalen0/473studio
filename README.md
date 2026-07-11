@@ -47,6 +47,12 @@ A young, fast‑moving developer taking ideas from a blank page to a working, de
 **Stack:** Next.js · Fastify · PostgreSQL · Telegram Bot API
 **Live:** [yesus.in](https://yesus.in)
 
+### SlitherCash — Real‑time multiplayer browser game
+> Snake‑arena with server‑authoritative physics (60 Hz tick, 20 Hz broadcast), client‑side prediction with server reconciliation, and entity interpolation — the same netcode patterns used in AAA multiplayer games. Companion Telegram Mini App with tap‑to‑earn mechanics, collectible skins with atomic minting, full admin panel (economy, users, skins, notifications, support tickets), and automated backup system.
+
+**Stack:** Next.js · TypeScript · Socket.IO · Node.js · PostgreSQL · Prisma · Canvas · Telegram Bot API
+**Live:** [slithercash.fun](https://slithercash.fun)
+
 ---
 
 ## Services
