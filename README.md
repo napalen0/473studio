@@ -53,6 +53,13 @@ A young, fast‑moving developer taking ideas from a blank page to a working, de
 **Stack:** Next.js · TypeScript · Socket.IO · Node.js · PostgreSQL · Prisma · Canvas · Telegram Bot API
 **Live:** [slithercash.fun](https://slithercash.fun)
 
+### RKN Spotter VPN — Telegram VPN bot
+> Self-hosted VPN service managed through a Telegram bot. One-tap access to VLESS + Reality (invisible to DPI), dual transport (TCP + gRPC), split-tunnel routing for Russian sites, multi-server pool with auto-provisioning via SSH, crypto payments via CryptoBot, and a full admin panel.
+
+**Stack:** Python · FastAPI · aiogram 3 · Xray-core · SQLite · asyncssh
+**Live:** [@rknspotter_bot](https://t.me/rknspotter_bot)
+**Source:** [github.com/napalen0/vpn-bot](https://github.com/napalen0/vpn-bot)
+
 ---
 
 ## Services
