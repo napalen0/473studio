@@ -102,8 +102,17 @@ function setLang(lang, instant) {
     typewrite(translations[lang].hero_title, instant);
 }
 
-const savedLang = localStorage.getItem('lang');
-setLang(savedLang && translations[savedLang] ? savedLang : 'ru', false);
+function detectLang() {
+    const saved = localStorage.getItem('lang');
+    if (saved && translations[saved]) return saved;
+    const browserLangs = navigator.languages || [navigator.language || 'ru'];
+    for (const tag of browserLangs) {
+        const code = tag.split('-')[0].toLowerCase();
+        if (translations[code]) return code;
+    }
+    return 'en';
+}
+setLang(detectLang(), false);
 
 // Dropdown toggle
 const langSelector = document.getElementById('langSelector');
