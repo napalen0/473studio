@@ -88,6 +88,7 @@ window.translations = {
         cta_title: "Есть задача?",
         cta_desc: "Напишите — обсудим проект, сроки и стоимость.",
         cta_btn: "Написать в Telegram",
+        cta_btn_email: "Написать на почту",
         footer_copy: "2026 473studio",
         footer_tg: "Написать в Telegram"
     },
@@ -177,6 +178,7 @@ window.translations = {
         cta_title: "Have a task?",
         cta_desc: "Write to us — we'll discuss project, timeline, and cost.",
         cta_btn: "Write in Telegram",
+        cta_btn_email: "Email us",
         footer_copy: "2026 473studio",
         footer_tg: "Write in Telegram"
     },
@@ -266,6 +268,7 @@ window.translations = {
         cta_title: "Имате задатак?",
         cta_desc: "Пишите — дискутујемо пројекат, термин и цену.",
         cta_btn: "Пиши у Telegram",
+        cta_btn_email: "Пиши на е-пошту",
         footer_copy: "2026 473studio",
         footer_tg: "Пиши у Telegram"
     },
@@ -355,6 +358,7 @@ window.translations = {
         cta_title: "Haben Sie eine Aufgabe?",
         cta_desc: "Schreiben Sie uns — wir besprechen Projekt, Zeitplan und Kosten.",
         cta_btn: "In Telegram schreiben",
+        cta_btn_email: "E-Mail schreiben",
         footer_copy: "2026 473studio",
         footer_tg: "In Telegram schreiben"
     },
@@ -444,6 +448,7 @@ window.translations = {
         cta_title: "Une tâche?",
         cta_desc: "Écrivez-nous — nous discuterons du projet, délais et coût.",
         cta_btn: "Écrire sur Telegram",
+        cta_btn_email: "Écrire par e-mail",
         footer_copy: "2026 473studio",
         footer_tg: "Écrire sur Telegram"
     },
@@ -533,6 +538,7 @@ window.translations = {
         cta_title: "¿Tienes una tarea?",
         cta_desc: "Escríbenos — discutimos proyecto, plazos y costo.",
         cta_btn: "Escribir en Telegram",
+        cta_btn_email: "Escribir por correo",
         footer_copy: "2026 473studio",
         footer_tg: "Escribir en Telegram"
     }

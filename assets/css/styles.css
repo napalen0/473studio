@@ -3,13 +3,19 @@
     --bg-elevated: #141414;
     --bg-card: #1a1a1a;
     --text: #ededed;
-    --text-secondary: #888;
-    --text-muted: #555;
-    --border: #2a2a2a;
-    --accent: #fff;
-    --runa-cyan: #00eaff;
-    --runa-magenta: #e040ff;
-    --us-red: #ff3b3b;
+    --text-secondary: #9a9a9a;
+    --text-muted: #5f5f5f;
+    --border: #262626;
+    --accent: #ededed;
+    --accent-hover: #fff;
+    --link: #b8c4d0;        /* cool desaturated steel — not Material blue */
+    --link-hover: #d4dde6;
+    /* Shape scale — ONE radius scale, locked across the page.
+       pills = full; cards = 14; inputs = 8; small chips/tags = 6. */
+    --radius-pill: 9999px;
+    --radius-card: 14px;
+    --radius-input: 8px;
+    --radius-chip: 6px;
     /* Motion — strong custom curves, not the too-weak built-in CSS easings */
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -21,10 +27,13 @@
     --bg-elevated: #ffffff;
     --bg-card: #ffffff;
     --text: #1a1a1a;
-    --text-secondary: #666;
-    --text-muted: #999;
-    --border: #e0e0e0;
+    --text-secondary: #5f5f5f;
+    --text-muted: #9a9a9a;
+    --border: #e2e2e2;
     --accent: #1a1a1a;
+    --accent-hover: #000;
+    --link: #4a5562;
+    --link-hover: #1a1a1a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -175,7 +184,7 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     min-width: 168px;
     background: var(--bg-elevated);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: var(--radius-card);
     padding: 0.375rem;
     box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 2px 8px rgba(0,0,0,0.2);
     display: none;
@@ -187,6 +196,25 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 }
 [data-theme="light"] .lang-dropdown {
     box-shadow: 0 8px 32px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06);
+}
+/* Light theme: drop shadows read cheap on white — mute the heavy mockup shadows
+   to a barely-there lift, keep only the inset highlights that define the bezel. */
+[data-theme="light"] .iphone-frame {
+    box-shadow:
+        0 20px 40px -20px rgba(0, 0, 0, 0.22),
+        0 8px 18px -12px rgba(0, 0, 0, 0.14),
+        inset 0 1px 1px rgba(255, 255, 255, 0.4),
+        inset 0 0 0 1px rgba(0, 0, 0, 0.18);
+}
+[data-theme="light"] .macbook-screen {
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.1),
+        0 0 0 2px #d8d8d8,
+        0 20px 45px -20px rgba(0, 0, 0, 0.2),
+        0 10px 22px -12px rgba(0, 0, 0, 0.12);
+}
+[data-theme="light"] header.scrolled {
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
 }
 .lang-selector.open .lang-dropdown { display: flex; }
 
@@ -202,17 +230,17 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     padding: 0.5rem 0.625rem;
     border: none;
     background: none;
-    border-radius: 7px;
+    border-radius: var(--radius-input);
     cursor: pointer;
     transition: background 0.15s var(--ease-out), transform 160ms var(--ease-out);
     width: 100%;
     text-align: left;
 }
-.lang-opt.active { background: rgba(33,150,243,0.12); }
+.lang-opt.active { background: rgba(184, 196, 208, 0.1); }
 .lang-opt-code {
     font-size: 0.7rem;
     font-weight: 700;
-    color: #2196F3;
+    color: var(--text-secondary);
     letter-spacing: 0.06em;
     min-width: 20px;
 }
@@ -256,8 +284,8 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     gap: 0.5rem;
     font-size: 0.875rem;
     font-weight: 600;
-    color: #fff;
-    background: #2196F3;
+    color: var(--bg);
+    background: var(--accent);
     padding: 0.625rem 1.25rem;
     border-radius: 100px;
     text-decoration: none;
@@ -268,21 +296,36 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 
 /* Hero */
 .hero {
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     align-items: center;
-    padding: 10rem 0 6rem;
+    padding: 7rem 0 4rem;
     position: relative;
     overflow: hidden;
 }
 
+/* Hero background — a quiet, considered field: a soft off-center glow, a
+   faint centered light shaft (reads as a studio key light, not a gradient
+   blob), and a hairline dot-grid for technical texture. No color, no blobs. */
 .hero-bg {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(0, 234, 255, 0.06) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 80% 60%, rgba(224, 64, 255, 0.05) 0%, transparent 60%);
+        radial-gradient(ellipse 65% 50% at 50% 18%, rgba(184, 196, 208, 0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(0, 0, 0, 0.5) 0%, transparent 60%),
+        radial-gradient(rgba(184, 196, 208, 0.05) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 38px 38px;
+    background-position: center, center, center;
+    -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%);
+    mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%);
     pointer-events: none;
+}
+[data-theme="light"] .hero-bg {
+    background:
+        radial-gradient(ellipse 65% 50% at 50% 18%, rgba(120, 140, 160, 0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
+        radial-gradient(rgba(60, 80, 100, 0.06) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 38px 38px;
 }
 
 .hero-content { position: relative; z-index: 1; }
@@ -303,7 +346,7 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     content: '';
     width: 6px;
     height: 6px;
-    background: #22c55e;
+    background: var(--text-muted);
     border-radius: 50%;
 }
 
@@ -392,10 +435,23 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 .project:nth-child(even) .project-info { order: 2; }
 .project:nth-child(even) .project-visual { order: 1; }
 
+/* Variant: feature — asymmetric split (visual dominant). Breaks the 4-row
+   split monotony: rows 1–2 are zigzag 50/50, row 3 leans visual 1.3/1.
+   No panel, no border, no shadow — the asymmetry alone is the rhythm break. */
+.project--feature {
+    grid-template-columns: 1.3fr 1fr;
+    gap: 5rem;
+}
+.project--feature .project-info { max-width: none; }
+.project--feature .project-name { font-size: 2.5rem; }
+
 .project-info { max-width: 520px; }
 .project-index { font-family: 'DM Sans', monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-.project-link { font-size: 0.65rem; color: #2196F3; text-decoration: none; padding: 0.2rem 0.5rem; border: 1px solid rgba(33, 150, 243, 0.3); border-radius: 4px; transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out), transform 160ms var(--ease-out); }
+.project-link { font-size: 0.65rem; color: var(--link); text-decoration: none; padding: 0.2rem 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-chip); transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out), transform 160ms var(--ease-out); }
 .project-name { font-family: 'Newsreader', Georgia, serif; font-size: 3rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+/* The project title links to the live project — inherit the heading's color so
+   it reads as a title, not a hyperlink, with no underline. */
+.project-name-link { color: inherit; text-decoration: none; }
 .project-category { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
 .project-description { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem; }
 
@@ -404,12 +460,13 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 .project-feature::before { content: ''; width: 5px; height: 5px; background: var(--text-muted); border-radius: 50%; }
 
 .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.project-tag { font-family: 'DM Sans', monospace; font-size: 0.7rem; font-weight: 600; color: var(--text); background: var(--bg-elevated); padding: 0.375rem 0.75rem; border-radius: 4px; border: 1px solid rgba(255,255,255,0.12); letter-spacing: 0.02em; }
+.project-tag { font-family: 'DM Sans', monospace; font-size: 0.7rem; font-weight: 600; color: var(--text); background: var(--bg-elevated); padding: 0.375rem 0.75rem; border-radius: var(--radius-chip); border: 1px solid var(--border); letter-spacing: 0.02em; }
 
 .project-visual { position: relative; }
 
 .project-frame {
     position: relative;
+    z-index: 1;
     display: flex;
     justify-content: center;
     padding: 2rem;
@@ -516,7 +573,7 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 .iphone-screen img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     display: block;
 }
 
@@ -526,9 +583,9 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     bottom: 4px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.35);
+    width: 64px;
+    height: 2.5px;
+    background: rgba(255, 255, 255, 0.28);
     border-radius: 2px;
 }
 
@@ -722,13 +779,15 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     margin: 3cqh auto 2.4cqh;
 }
 .runa-lead {
-    font-weight: 500;
-    font-size: 2.7cqw;        /* 34.4px / 1280 = 2.69cqw */
-    letter-spacing: -0.01em;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.5cqw;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
     color: #ffffff;
-    line-height: 1.22;
+    line-height: 1.4;
     margin: 0 auto 1cqh;
-    max-width: 18em;
+    max-width: 22em;
 }
 .runa-subline {
     font-size: 0.9cqw;        /* 11.52px / 1280 = 0.9cqw */
@@ -966,12 +1025,36 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
 }
+/* iOS status bar — time on the left, signal/wifi/battery on the right, sitting
+   above the Dynamic Island zone. Same pattern for both phone mockups. */
+.ios-statusbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2.6cqh 4.5cqw 1.4cqh;
+    flex-shrink: 0;
+    color: #fff;
+    z-index: 7;
+}
+.ios-statusbar-vpn { color: #fff; }
+.ios-status-time {
+    font-size: 3.5cqw;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    padding-left: 1cqw;
+}
+.ios-status-right { display: flex; align-items: center; gap: 1.6cqw; padding-right: 1cqw; }
+.ios-status-signal { width: 5.4cqw; height: 3.6cqw; }
+.ios-status-wifi { width: 4.8cqw; height: 3.6cqw; }
+.ios-status-battery { width: 7.8cqw; height: 3.6cqw; }
 .us-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4.5cqh 3cqw 3cqh;
+    padding: 1.2cqh 4.5cqw 3.2cqh;   /* raised closer to the status bar */
     flex-shrink: 0;
 }
 .us-header-left { display: flex; flex-direction: column; }
@@ -986,16 +1069,18 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 .us-sub {
     font-size: 2.8cqw;             /* 11px / 390 */
     color: rgba(255, 255, 255, 0.5);
-    margin-top: -0.3cqh;
+    margin-top: 0.4cqh;
+    font-variant-numeric: tabular-nums;
 }
 .us-nav { display: flex; align-items: center; gap: 2cqw; }   /* gap 8px = 2cqw */
 .us-pill {
     border-radius: 9999px;         /* rounded-full */
     background: rgba(255, 255, 255, 0.10);
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.92);
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 .us-pill svg { width: 4cqw; height: 4cqw; }
 .us-pill-catalog { gap: 1cqw; padding: 0 3.2cqw; height: 9.2cqw; font-size: 3.3cqw; font-weight: 500; }  /* h36, text 13px */
@@ -1003,25 +1088,27 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 .us-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 32.67cqw;      /* square: matches the 1fr column width (98cqw/3) */
     gap: 0.5cqw;                   /* 2px / 390 */
-    padding: 0 0.5cqw 0.5cqw;
+    padding: 0 0.5cqw 9cqw;        /* bottom room for the iOS home indicator */
     flex: 1;
     overflow: hidden;
 }
 .us-tile {
     position: relative;
-    aspect-ratio: 1 / 1;
     overflow: hidden;
-    background: #1a1a1e;
+    background: #131316;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);  /* subtle image outline, pure white per dark mode */
 }
 .us-tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .us-tile-info {
     position: absolute;
     left: 0; right: 0; bottom: 0;
-    padding: 1cqw;
-    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    padding: 2.6cqw 1cqw 0.9cqw;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 18%, rgba(0,0,0,0.4) 60%, transparent);
     display: flex;
     flex-direction: column;
+    gap: 0.2cqw;
 }
 .us-tile-name {
     font-size: 2.4cqw;             /* ~9-10px on 390 */
@@ -1030,18 +1117,20 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    line-height: 1.2;
 }
 .us-tile-price {
-    font-size: 2.6cqw;
+    font-size: 2.7cqw;
     font-weight: 600;
     color: #fff;
-    margin-top: 0.2cqw;
+    font-variant-numeric: tabular-nums;
+    line-height: 1.1;
 }
 
-/* ── RKN Spotter VPN — faithful recreation of the live bot (/root/vpn-bot):
-   answer_photo message = banner image + caption "👋 Привет, друг! Выберите пункт в меню ниже.",
-   inline keyboard stacked one-button-per-row (full width, hairline dividers, accent-blue text),
-   Telegram dark theme #0e1621 chat / #182533 bubble / #17212b keyboard. Sizes in cqw (vs 390px). */
+/* ── RKN Spotter VPN — recreation of the live bot (/root/vpn-bot):
+   answer_photo message = square banner image + caption "👋 Привет, друг! Выберите пункт в меню ниже.",
+   inline keyboard stacked one-button-per-row (full width, hairline dividers, white centered text),
+   Telegram dark theme #0e1621 chat / #182533 bubble / #17212b bars. Sizes in cqw (vs 390px). */
 .vpn-chat {
     position: absolute;
     inset: 0;
@@ -1052,130 +1141,173 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     flex-direction: column;
     overflow: hidden;
     border-radius: inherit;          /* follow the .iphone-screen 30px corners */
+    -webkit-font-smoothing: antialiased;
 }
-/* Bot top bar — first element, sits at the very top; .iphone-screen clips the rounded corners */
+/* Status bar blends onto the bot topbar color (#17212b). */
+.vpn-chat > .ios-statusbar { background: #17212b; }
+/* Bot top bar — sits right under the status bar; .iphone-screen clips the rounded corners */
 .vpn-topbar {
     display: flex;
     align-items: center;
     gap: 3cqw;
-    padding: 4cqw 4cqw 3.4cqw;
+    padding: 1.6cqh 3cqw 3.2cqh;
     background: #17212b;
     flex-shrink: 0;
 }
-.vpn-back { font-size: 6.2cqw; color: #7ab2ef; line-height: 1; }
-.vpn-avatar {
-    width: 11cqw; height: 11cqw;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #6cc1ff, #2b6fd6 70%);
+/* Back chevron — optically nudged right so the triangle sits on the bar's center axis */
+.vpn-back {
+    color: #7ab2ef;
+    width: 6cqw; height: 6cqw;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 5.5cqw;
     flex-shrink: 0;
+    margin-left: 1cqw;
 }
+.vpn-back svg { width: 6.4cqw; height: 6.4cqw; }
+.vpn-avatar {
+    width: 11cqw; height: 11cqw;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 28%, #6cc1ff 0%, #3b7dd6 55%, #2b5fa8 100%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #eaf3ff;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.18),
+        0 2px 6px -2px rgba(43, 95, 168, 0.6);
+}
+.vpn-avatar svg { width: 7cqw; height: 7cqw; }
 .vpn-topbar-info { flex: 1; min-width: 0; }
 .vpn-bot-name { font-size: 4.6cqw; font-weight: 600; color: #fff; line-height: 1.15; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .vpn-bot-status { font-size: 3.4cqw; color: #a8b6c8; line-height: 1.2; }
-.vpn-menu { font-size: 4.4cqw; color: #a8b6c8; line-height: 1; letter-spacing: 0.05em; }
+/* Menu dots — optically centered column */
+.vpn-menu {
+    color: #a8b6c8;
+    width: 7cqw; height: 7cqw;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 1cqw;
+}
+.vpn-menu svg { width: 4.6cqw; height: 4.6cqw; }
 .vpn-messages {
     flex: 1;
-    padding: 3cqw 3cqw 0;
+    padding: 3.6cqw 3cqw 3cqw;
     display: flex;
     flex-direction: column;
     gap: 3cqw;
     background: #0e1621;
     overflow: hidden;
 }
-/* Photo message: banner fills the bubble width, caption sits under it. */
+/* Photo message: banner image with caption + inline keyboard beneath.
+   Image is height-capped so the keyboard stays visible inside the screen. */
 .vpn-msg {
     background: #182533;
-    border-radius: 3cqw 3cqw 3cqw 0.6cqw;
+    border-radius: 3.2cqw 3.2cqw 3.2cqw 0.8cqw;
     align-self: flex-start;
-    max-width: 84%;
+    width: 60%;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);   /* pure-white outline, dark-mode */
 }
-.vpn-msg-photo {
+.iphone-screen .vpn-msg-photo {
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1 / 1;            /* square — the banner is 736×736, shown whole */
     object-fit: cover;
 }
 .vpn-msg-caption {
-    padding: 2.6cqw 3.2cqw 3.4cqw;
+    padding: 2.6cqw 3.2cqw 3cqw;
     display: flex;
     flex-direction: column;
     gap: 1cqw;
 }
 .vpn-msg-greeting { font-size: 4.2cqw; font-weight: 500; color: #fff; line-height: 1.3; }
 .vpn-msg-sub { font-size: 3.9cqw; color: #c4cdd9; line-height: 1.35; }
+/* Media wrapper holds the photo + the timestamp overlay (time sits on the
+   image's bottom-right corner, like a Telegram media message — not on the
+   keyboard). */
+.vpn-msg-media { position: relative; }
 .vpn-msg-time {
     position: absolute;
-    right: 3.2cqw;
-    bottom: 1.8cqw;
+    right: 2.4cqw;
+    bottom: 2.4cqw;
     font-size: 3cqw;
-    color: #7d8ca3;
-    text-shadow: 0 0 4px rgba(0,0,0,0.6);
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    font-variant-numeric: tabular-nums;
 }
-/* Inline keyboard: single full-width block, one button per row, hairline dividers,
-   white centered labels — matches the live bot's InlineKeyboardMarkup. */
+/* Inline keyboard: lives inside the bot's message bubble, full width of the
+   photo. Each button is a rounded outline cell sized to the input-field height,
+   with a gap between cells — matches the live bot's InlineKeyboardMarkup. */
 .vpn-keyboard {
-    background: #17212b;
-    border-radius: 0;
-    align-self: stretch;
-    overflow: hidden;
+    padding: 0 3.2cqw 3.2cqw;
     display: flex;
     flex-direction: column;
+    gap: 1.6cqw;
 }
 .vpn-btn {
-    color: #fff;
-    padding: 3.4cqw 2cqw;
-    font-size: 4cqw;
+    color: #ffffff;
+    height: 11cqw;                  /* matches the input-field height */
+    line-height: 11cqw;
+    padding: 0 1.2cqw;
+    font-size: 4.2cqw;
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-top: 1px solid #0b131a;
     background: transparent;
-    border-radius: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 2cqw;            /* gentle rounding, not a pill */
     display: block;
 }
-.vpn-btn:first-child { border-top: none; }
+/* Single bottom panel: input row + slim home-indicator zone share one
+   surface (#17212b) so they read as one bar, not two stacked bars. */
+.vpn-inputbar {
+    background: #17212b;
+    flex-shrink: 0;
+}
 .vpn-input {
     display: flex;
     align-items: center;
-    gap: 2.6cqw;
-    padding: 2.4cqw 3cqw;
-    background: #17212b;
+    gap: 2.4cqw;
+    padding: 1.8cqw 3cqw 8cqw;    /* lift the row clear of the home indicator */
+    background: transparent;
     flex-shrink: 0;
 }
-/* Home-indicator zone: same bar color, room below the input for the iPhone home pill */
-.vpn-home {
-    height: 7.4cqw;
-    background: #17212b;
-    flex-shrink: 0;
-}
+/* The iOS home indicator is drawn by .iphone-screen::after (native), so the
+   input bar just needs a little bottom padding to clear it. */
 .vpn-input-field {
     flex: 1;
+    height: 11cqw;                  /* matches the inline keyboard buttons */
+    line-height: 11cqw;
     background: #0e1621;
-    border-radius: 6.4cqw;
-    padding: 2.4cqw 3.6cqw;
-    font-size: 4cqw;
+    border-radius: 5.5cqw;
+    padding: 0 3.4cqw;
+    font-size: 4.2cqw;
     color: #7a8aa3;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
-.vpn-send {
-    width: 10.8cqw; height: 10.8cqw;
+/* Attachment (paperclip) + voice (mic) flank the field — neutral icon tint,
+   no blue. Round, sized to the field height. */
+/* Attachment + voice sit on the same dark disc as the input field (#0e1621),
+   so the three controls read as one consistent row. */
+.vpn-attach, .vpn-mic {
+    width: 11cqw; height: 11cqw;
     border-radius: 50%;
-    background: #2b5278;
-    color: #fff;
+    background: #0e1621;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 5cqw;
     flex-shrink: 0;
+    color: #9aa8bc;
 }
+.vpn-attach svg, .vpn-mic svg { width: 6cqw; height: 6cqw; }
 
 /* Respect reduced motion — freeze the live backgrounds (no pulsing/floating) */
 @media (prefers-reduced-motion: reduce) {
@@ -1240,7 +1372,7 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 .services { padding: 8rem 0; background: var(--bg-elevated); }
 .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 4rem; }
 
-.service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; }
+.service-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-card); padding: 2rem; }
 .service-icon { width: 48px; height: 48px; background: var(--bg-elevated); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
 .service-icon svg { width: 24px; height: 24px; stroke: var(--text-secondary); }
 .service-card h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
@@ -1248,8 +1380,27 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 
 /* Tech */
 .tech { padding: 8rem 0; }
-.tech-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 4rem; }
-.tech-item { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 0.625rem 1rem; font-size: 0.85rem; font-weight: 500; transition: border-color 0.2s var(--ease-out), background 0.2s var(--ease-out), transform 160ms var(--ease-out); }
+/* Tech grouped into labelled clusters instead of a flat wrap — reads as a
+   considered toolset, not a keyword salad. */
+.tech-clusters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 4rem;
+    margin-top: 4rem;
+}
+.tech-cluster-label {
+    font-family: 'DM Sans', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+}
+.tech-items { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.tech-item { display: flex; align-items: center; gap: 0.5rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-input); padding: 0.625rem 1rem; font-size: 0.85rem; font-weight: 500; transition: border-color 0.2s var(--ease-out), background 0.2s var(--ease-out), transform 160ms var(--ease-out); }
 .tech-item svg { width: 16px; height: 16px; stroke: var(--text-muted); }
 
 /* CTA */
@@ -1275,15 +1426,29 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     gap: 0.75rem;
     font-size: 1rem;
     font-weight: 600;
-    color: #2196F3;
+    color: var(--accent);
     background: transparent;
-    border: 2px solid #2196F3;
+    border: 2px solid var(--accent);
     padding: 1rem 2rem;
     border-radius: 100px;
     text-decoration: none;
     transition: background 0.2s var(--ease-out), color 0.2s var(--ease-out), transform 160ms var(--ease-out);
 }
 .cta-btn svg { flex-shrink: 0; }
+/* Two contact channels — Telegram (primary, filled on hover) and email
+   (secondary, quieter outline). Stacked on narrow viewports. */
+.cta-actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.cta-btn-email {
+    color: var(--text-secondary);
+    border-color: var(--border);
+}
+.cta-btn-email:hover { background: var(--bg-elevated); border-color: var(--text-muted); color: var(--text); }
+.cta-btn-email:active { transform: scale(0.97); }
 
 /* Footer */
 footer { padding: 2rem 0; border-top: 1px solid var(--border); }
@@ -1302,10 +1467,10 @@ footer .container { display: flex; justify-content: space-between; align-items: 
     [data-theme="light"] .lang-opt:hover { background: rgba(0,0,0,0.05); }
     .theme-toggle:hover { color: #ededed; border-color: #888; background: rgba(255,255,255,0.05); }
     [data-theme="light"] .theme-toggle:hover { color: #1a1a1a; border-color: #999; }
-    .header-cta:hover { background: #1976D2; }
-    .project-link:hover { background: rgba(33, 150, 243, 0.1); border-color: #2196F3; }
+    .header-cta:hover { background: var(--accent-hover); }
+    .project-link:hover { background: rgba(184, 196, 208, 0.08); border-color: var(--text-muted); }
     .tech-item:hover { border-color: var(--text-muted); background: var(--bg-card); }
-    .cta-btn:hover { background: #2196F3; color: #fff; }
+    .cta-btn:hover { background: var(--accent); color: var(--bg); }
     .footer-links a:hover { color: var(--text); }
 }
 
@@ -1393,6 +1558,9 @@ footer .container { display: flex; justify-content: space-between; align-items: 
         gap: 1.5rem;
         padding: 2.5rem 0;
     }
+    /* Feature variant collapses to the same centered column on mobile */
+    .project--feature { grid-template-columns: none; gap: 1.5rem; }
+    .project--feature .project-name { font-size: 2rem; }
     /* Even rows used order-swapping on desktop — on mobile, visual always first */
     .project:nth-child(even) .project-info { order: 2; }
     .project:nth-child(even) .project-visual { order: 1; }
@@ -1413,7 +1581,7 @@ footer .container { display: flex; justify-content: space-between; align-items: 
 
     /* Tech mobile */
     .tech { padding: 3rem 0; }
-    .tech-grid { margin-top: 2rem; }
+    .tech-clusters { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
 
     /* CTA mobile */
     .cta { padding: 4rem 0; }

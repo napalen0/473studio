@@ -123,6 +123,7 @@ open index.html
 ## Contact
 
 **Telegram → [@sadmillionaire](https://t.me/sadmillionaire)**
+**Email → [permoscow@icloud.com](mailto:permoscow@icloud.com)**
 
 <div align="center">
 <br>
