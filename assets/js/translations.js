@@ -89,6 +89,7 @@ window.translations = {
         cta_desc: "Напишите — обсудим проект, сроки и стоимость.",
         cta_btn: "Написать в Telegram",
         cta_btn_email: "Написать на почту",
+        cta_btn_email_copied: "Email скопирован",
         footer_copy: "2026 473studio",
         footer_tg: "Написать в Telegram"
     },
@@ -179,6 +180,7 @@ window.translations = {
         cta_desc: "Write to us — we'll discuss project, timeline, and cost.",
         cta_btn: "Write in Telegram",
         cta_btn_email: "Email us",
+        cta_btn_email_copied: "Email copied",
         footer_copy: "2026 473studio",
         footer_tg: "Write in Telegram"
     },
@@ -269,6 +271,7 @@ window.translations = {
         cta_desc: "Пишите — дискутујемо пројекат, термин и цену.",
         cta_btn: "Пиши у Telegram",
         cta_btn_email: "Пиши на е-пошту",
+        cta_btn_email_copied: "Е-пошта копирана",
         footer_copy: "2026 473studio",
         footer_tg: "Пиши у Telegram"
     },
@@ -359,6 +362,7 @@ window.translations = {
         cta_desc: "Schreiben Sie uns — wir besprechen Projekt, Zeitplan und Kosten.",
         cta_btn: "In Telegram schreiben",
         cta_btn_email: "E-Mail schreiben",
+        cta_btn_email_copied: "E-Mail kopiert",
         footer_copy: "2026 473studio",
         footer_tg: "In Telegram schreiben"
     },
@@ -449,6 +453,7 @@ window.translations = {
         cta_desc: "Écrivez-nous — nous discuterons du projet, délais et coût.",
         cta_btn: "Écrire sur Telegram",
         cta_btn_email: "Écrire par e-mail",
+        cta_btn_email_copied: "E-mail copié",
         footer_copy: "2026 473studio",
         footer_tg: "Écrire sur Telegram"
     },
@@ -539,6 +544,7 @@ window.translations = {
         cta_desc: "Escríbenos — discutimos proyecto, plazos y costo.",
         cta_btn: "Escribir en Telegram",
         cta_btn_email: "Escribir por correo",
+        cta_btn_email_copied: "Correo copiado",
         footer_copy: "2026 473studio",
         footer_tg: "Escribir en Telegram"
     }

@@ -479,3 +479,50 @@ window.addEventListener('scroll', () => {
     }, { threshold: 0.1 });
     io.observe(canvas);
 })();
+
+// ── Email CTA: try mailto:, fall back to "copied" feedback when no mail client.
+// A click on a mailto: link does nothing on devices without a registered mail
+// handler — instead of dying silently, copy the address to the clipboard and
+// show a localized "Email copied" confirmation on the button.
+(function setupEmailCta() {
+    const btn = document.querySelector('.cta-btn-email');
+    if (!btn) return;
+    const span = btn.querySelector('span');
+    const email = (btn.getAttribute('href') || '').replace(/^mailto:/, '');
+    let restoreTimer = null;
+
+    const i18nKey = 'cta_btn_email_copied';
+    const currentLang = () => localStorage.getItem('lang') || 'en';
+    const copiedText = () => (translations[currentLang()] && translations[currentLang()][i18nKey]) || 'Email copied';
+
+    btn.addEventListener('click', async (e) => {
+        // Copy first — this always works and gives the user the address even
+        // if a mail handler opens and takes focus.
+        try {
+            await navigator.clipboard.writeText(email);
+        } catch (_) { /* clipboard may be blocked; mailto is still attempted */ }
+
+        const hadFocus = document.hasFocus();
+        // Give the browser a tick, then check whether a mail handler grabbed
+        // focus (document loses focus / window blurs). If it didn't, the user
+        // has no mail client — show the copied confirmation instead.
+        setTimeout(() => {
+            const mailClientOpened = document.hidden || !document.hasFocus()
+                || (hadFocus && !document.hasFocus());
+            if (mailClientOpened) return; // mailto worked, nothing to do
+
+            if (span) {
+                if (restoreTimer) clearTimeout(restoreTimer);
+                span.textContent = copiedText();
+                btn.classList.add('is-copied');
+                const snapshot = span.textContent;
+                restoreTimer = setTimeout(() => {
+                    const key = 'cta_btn_email';
+                    span.textContent = (translations[currentLang()] && translations[currentLang()][key]) || 'Email';
+                    btn.classList.remove('is-copied');
+                }, 3000);
+            }
+        }, 250);
+        // Do NOT preventDefault — let the browser attempt mailto: in parallel.
+    });
+})();
