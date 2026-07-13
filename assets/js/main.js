@@ -1,11 +1,16 @@
-// 473studio — behavior: i18n apply, hero typewriter, theme, language dropdown, scroll
+// 473studio — behavior: i18n apply, hero typewriter, theme, language dropdown,
+// scroll reveal, and the App-Store-style project modal (with its live mockups).
 // Depends on window.translations (translations.js must load first)
 
 const translations = window.translations;
 
-
 const langs = ['ru', 'en', 'sr', 'de', 'fr', 'es'];
 const zoneMap = { ru: '.ru', en: '.com', sr: '.rs', de: '.de', fr: '.fr', es: '.es' };
+
+// Per-project live-mockup controllers, registered by their setup routines below.
+// The modal starts/stops the matching one when a panel is shown/hidden, so the
+// RUNA video and the SlitherCash snake canvas only run while on screen.
+const mediaControllers = {};
 
 // Tokenize HTML string into typed chunks: text chars, <br>, <em>...</em>
 function tokenizeHTML(html) {
@@ -36,6 +41,7 @@ let typewriterTimer = null;
 // widths are final from the start, so nothing shifts while chars fade in.
 function typewrite(htmlStr, instant) {
     const el = document.getElementById('heroTitle');
+    if (!el) return;
     if (typewriterTimer) { clearTimeout(typewriterTimer); typewriterTimer = null; }
 
     const tokens = tokenizeHTML(htmlStr);
@@ -85,7 +91,7 @@ function typewrite(htmlStr, instant) {
     setTimeout(tick, 250);
 }
 
-function setLang(lang, instant) {
+function setLang(lang, isInitial) {
     document.documentElement.lang = translations[lang].html_lang || lang;
     localStorage.setItem('lang', lang);
 
@@ -101,8 +107,10 @@ function setLang(lang, instant) {
         if (translations[lang][key]) el.textContent = translations[lang][key];
     });
 
-    // hero title handled separately via typewriter
-    typewrite(translations[lang].hero_title, instant);
+    // Hero title is handled separately by the typewriter so it stays in sync
+    // with the chosen language. Animate the char-by-char reveal on first load;
+    // on a manual language switch, update the title instantly (no re-typing).
+    typewrite(translations[lang].hero_title, !isInitial);
 }
 
 function detectLang() {
@@ -115,7 +123,7 @@ function detectLang() {
     }
     return 'en';
 }
-setLang(detectLang(), false);
+setLang(detectLang(), true);
 
 // Dropdown toggle
 const langSelector = document.getElementById('langSelector');
@@ -125,7 +133,7 @@ langSelector.addEventListener('click', e => {
 });
 document.querySelectorAll('.lang-opt').forEach(btn => {
     btn.addEventListener('click', e => {
-        setLang(btn.dataset.lang, true);
+        setLang(btn.dataset.lang, false);
         langSelector.classList.remove('open');
         e.stopPropagation();
     });
@@ -144,14 +152,10 @@ const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') document.documentElement.setAttribute('data-theme', 'light');
 
 // Header scroll behavior
-let lastScroll = 0;
 const headerEl = document.querySelector('header');
-
 window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    if (currentScroll > 100) headerEl.classList.add('scrolled');
+    if (window.pageYOffset > 100) headerEl.classList.add('scrolled');
     else headerEl.classList.remove('scrolled');
-    lastScroll = currentScroll;
 });
 
 // ── Scroll reveal: elements with .reveal rise+fade in as they enter the viewport.
@@ -191,65 +195,27 @@ window.addEventListener('scroll', () => {
     reveals.forEach(el => io.observe(el));
 })();
 
-// ── Number ticker: .meta-value[data-count] counts up from 0 to its target once
-// it scrolls into view. Suffix (+/%) lives in .meta-suffix and stays put.
-// Uses tabular-nums (CSS) so digits don't shift width while counting.
-(function setupNumberTicker() {
-    const targets = document.querySelectorAll('.meta-value[data-count]');
-    if (!targets.length) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function animate(el, to) {
-        const num = el.querySelector('.meta-num');
-        if (!num) return;
-        if (prefersReducedMotion) { num.textContent = to; return; }
-        const duration = 1200; // ms — rare/first-time motion, delight budget allows a slower count
-        const start = performance.now();
-        function frame(now) {
-            const t = Math.min((now - start) / duration, 1);
-            // ease-out cubic — fast start, gentle settle
-            const eased = 1 - Math.pow(1 - t, 3);
-            num.textContent = Math.round(to * eased);
-            if (t < 1) requestAnimationFrame(frame);
-        }
-        requestAnimationFrame(frame);
-    }
-
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animate(entry.target, parseInt(entry.target.dataset.count, 10));
-                io.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    targets.forEach(el => io.observe(el));
-})();
-
-// ── RUNA hero video — pause it under prefers-reduced-motion (video is vestibular
-//    stimulus) and when the mockup scrolls off-screen (don't burn CPU off-viewport).
+// ── RUNA hero video — registered as the 'runa' media controller. The modal
+//    plays it when the RUNA panel opens and pauses it on close. Frozen entirely
+//    under prefers-reduced-motion (video is vestibular stimulus).
 (function setupRunaVideo() {
     const video = document.querySelector('video.runa-video');
     if (!video) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (reduced.matches) { video.pause(); video.currentTime = 0; return; }
-    // Pause when off-screen, resume when visible
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-            if (e.isIntersecting) video.play().catch(() => {});
-            else video.pause();
-        });
-    }, { threshold: 0.1 });
-    io.observe(video);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    mediaControllers.runa = {
+        start() {
+            if (reduced) { video.pause(); video.currentTime = 0; return; }
+            video.play().catch(() => {});
+        },
+        stop() { video.pause(); },
+    };
 })();
 
 // ── Live snake canvas for the SlitherCash project mockup — a faithful port of the
 // real slithercash.fun BackgroundSnakes component (src/components/BackgroundSnakes.tsx).
 // 7 snakes, trail-following segments with taper, wandering + mutual avoidance +
-// boundary steering, perpendicular wiggle, eyes. Runs only while on screen and
-// not under prefers-reduced-motion (paused via IntersectionObserver otherwise).
+// boundary steering, perpendicular wiggle, eyes. Registered as the 'slither'
+// media controller; the modal starts it on open and stops it on close.
 (function setupLiveSnakes() {
     const canvas = document.querySelector('canvas.live-snakes[data-snakes="slither"]');
     if (!canvas) return;
@@ -449,10 +415,14 @@ window.addEventListener('scroll', () => {
 
     function start() {
         if (running) return;
-        // Ensure sizing is current — on first visible the layout may just have settled.
+        // Ensure sizing is current — on first open the layout may just have settled.
         resize();
-        if (w < 2 || h < 2) return; // not laid out yet; IntersectionObserver will retry
-        if (snakes.length === 0) initSnakes();
+        if (w < 2 || h < 2) {
+            // Not laid out yet (modal just opened) — retry on the next frame.
+            requestAnimationFrame(start);
+            return;
+        }
+        initSnakes();
         running = true;
         if (!raf) raf = requestAnimationFrame(step);
     }
@@ -461,23 +431,120 @@ window.addEventListener('scroll', () => {
         if (raf) { cancelAnimationFrame(raf); raf = 0; }
     }
 
-    // Resize handling — the macbook mockup is responsive, so watch the canvas size.
+    // Responsive: the macbook mockup is fluid, so re-seed on size changes while running.
     const ro = new ResizeObserver(() => {
+        if (!running) return;
         if (w < 2 || h < 2) { resize(); return; }
-        const wasRunning = running;
         resize();
         if (w < 2 || h < 2) return;
         initSnakes(); // re-seed at the new size so snakes stay in-bounds
         ctx.clearRect(0, 0, w, h);
-        if (wasRunning) start();
     });
     ro.observe(canvas);
 
-    // Start/pause with viewport visibility — don't burn CPU when off-screen.
-    const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => e.isIntersecting ? start() : stop());
-    }, { threshold: 0.1 });
-    io.observe(canvas);
+    mediaControllers.slither = { start, stop };
+})();
+
+const accentMap = {
+    runa:    '0, 234, 255',   // cyan  #00eaff
+    us:      '168, 85, 247',   // purple #a855f7
+    slither: '16, 185, 129',   // green  #10b981
+    vpn:     '59, 130, 246',   // blue   #3b82f6
+};
+
+// ── Project modal (App Store-style) ─────────────────────────────────────────
+// Opens the detail panel for a clicked project row: shows the matching panel,
+// starts its live mockup, traps focus, locks page scroll, and restores focus to
+// the triggering row on close. Esc / backdrop / close-button all dismiss it.
+(function setupProjectModal() {
+    const modal = document.getElementById('projectModal');
+    if (!modal) return;
+    const dialog = modal.querySelector('.pm-dialog');
+    const panels = modal.querySelectorAll('.pm-panel');
+    const rows = document.querySelectorAll('.project-row');
+
+    let activeId = null;
+    let lastTrigger = null;
+    let closeTimer = null;
+
+    const FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+    function showPanel(id) {
+        panels.forEach(p => { p.hidden = (p.dataset.panel !== id); });
+    }
+
+    function open(id, trigger) {
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+        activeId = id;
+        lastTrigger = trigger || null;
+        showPanel(id);
+
+        // Set the per-project accent colour on the dialog so CSS can tint the
+        // podium glow, eyebrow, feature bullets, and the primary CTA.
+        const rgb = accentMap[id] || '184, 196, 208';
+        dialog.style.setProperty('--pm-accent', rgb);
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('pm-locked');
+
+        // Start this panel's live mockup (video / snakes), if any.
+        mediaControllers[id]?.start();
+
+        // Reset the scroll position of the write-up and focus the dialog.
+        const body = modal.querySelector('.pm-body');
+        if (body) body.scrollTop = 0;
+        // Focus the close button so Esc/Tab have a sane starting point.
+        const closeBtn = modal.querySelector('.pm-close');
+        requestAnimationFrame(() => closeBtn && closeBtn.focus());
+    }
+
+    function close() {
+        if (!activeId) return;
+        const id = activeId;
+        activeId = null;
+
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('pm-locked');
+
+        // Stop the live mockup and hide the panel after the exit transition.
+        mediaControllers[id]?.stop();
+        closeTimer = setTimeout(() => {
+            if (!activeId) panels.forEach(p => { p.hidden = true; });
+        }, 340);
+
+        // Return focus to the row that opened the modal.
+        if (lastTrigger) { lastTrigger.focus(); lastTrigger = null; }
+    }
+
+    // Row clicks open the matching panel.
+    rows.forEach(row => {
+        row.addEventListener('click', () => open(row.dataset.project, row));
+    });
+
+    // Any element marked [data-close] (backdrop, close button) dismisses.
+    modal.querySelectorAll('[data-close]').forEach(el => {
+        el.addEventListener('click', close);
+    });
+
+    // Esc closes; Tab is trapped within the dialog while open.
+    document.addEventListener('keydown', (e) => {
+        if (!activeId) return;
+        if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+        if (e.key === 'Tab') {
+            const focusables = Array.from(dialog.querySelectorAll(FOCUSABLE))
+                .filter(el => el.offsetParent !== null || el === document.activeElement);
+            if (!focusables.length) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault(); last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault(); first.focus();
+            }
+        }
+    });
 })();
 
 // ── Email CTA: try mailto:, fall back to "copied" feedback when no mail client.
@@ -515,7 +582,6 @@ window.addEventListener('scroll', () => {
                 if (restoreTimer) clearTimeout(restoreTimer);
                 span.textContent = copiedText();
                 btn.classList.add('is-copied');
-                const snapshot = span.textContent;
                 restoreTimer = setTimeout(() => {
                     const key = 'cta_btn_email';
                     span.textContent = (translations[currentLang()] && translations[currentLang()][key]) || 'Email';

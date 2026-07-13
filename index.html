@@ -92,10 +92,6 @@
                 <div class="hero-label" data-i18n="hero_label">Full-Stack разработка</div>
                 <h1 id="heroTitle">Создаю <em>сложные</em><br>веб-системы<span class="hero-cursor"></span></h1>
                 <p class="hero-description" data-i18n="hero_desc">От архитектуры и баз данных до Telegram-ботов, ML/AI и блокчейн-решений. Работаю с Python, Go, Rust, Node.js, Solidity и многим другим.</p>
-                <div class="hero-meta">
-                    <div class="meta-item"><div class="meta-value" data-count="20"><span class="meta-num">0</span><span class="meta-suffix">+</span></div><div class="meta-label" data-i18n="hero_stat_projects">Проектов</div></div>
-                    <div class="meta-item"><div class="meta-value" data-count="5"><span class="meta-num">0</span><span class="meta-suffix">+</span></div><div class="meta-label" data-i18n="hero_stat_years">Лет опыта</div></div>
-                </div>
             </div>
         </div>
     </section>
@@ -105,294 +101,83 @@
             <div class="section-header reveal">
                 <div class="section-label">Portfolio</div>
                 <h2 class="section-title" data-i18n="projects_title">Проекты</h2>
+                <p class="section-hint" data-i18n="projects_hint">Нажмите на проект, чтобы посмотреть подробности</p>
             </div>
 
-            <div class="project reveal">
-                <div class="project-info">
-                    <div class="project-index"><span data-i18n="runa_index">01 / Cyber Club Platform</span> <a href="https://runavrn.ru" target="_blank" class="project-link">runavrn.ru</a></div>
-                    <h3 class="project-name"><a href="https://runavrn.ru" target="_blank" class="project-name-link">RUNA</a></h3>
-                    <p class="project-category" data-i18n="runa_category">Сеть киберклубов — Конфигуратор и CRM</p>
-                    <p class="project-description" data-i18n="runa_desc">Платформа для сети компьютерных клубов с интерактивным конфигуратором игровых зон. Выбор комплектации ПК, мониторов, периферии для каждой локации. Система сбора заявок на франшизу и Telegram-бот для отзывов.</p>
-                    <div class="project-features">
-                        <div class="project-feature" data-i18n="runa_f1">Конфигуратор зон для 8+ локаций</div>
-                        <div class="project-feature" data-i18n="runa_f2">Система заявок на франшизу</div>
-                        <div class="project-feature" data-i18n="runa_f3">Telegram-бот для обратной связи</div>
-                        <div class="project-feature" data-i18n="runa_f4">FastAPI + React фронтенд</div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">FastAPI</span>
-                        <span class="project-tag">Aiogram 3</span>
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">SQLite</span>
-                    </div>
-                </div>
-                <div class="project-visual">
-                    
-                    <div class="project-frame">
-                        <div class="macbook-frame">
-                            <div class="macbook-screen">
-                                <div class="macbook-display">
-                                    <video class="runa-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-                                        <source src="assets/media/runa-hero.mp4" type="video/mp4">
-                                    </video>
-                                    <div class="runa-overlay" aria-hidden="true"></div>
-                                    <div class="runa-lines" aria-hidden="true"></div>
-                                    <div class="runa-content">
-                                        <p class="runa-eyebrow" data-i18n="runa_hero_eyebrow">8 локаций · 4 города</p>
-                                        <div class="runa-logo" role="img" aria-label="RUNA"></div>
-                                        <div class="runa-divider"></div>
-                                        <p class="runa-lead" data-i18n="runa_hero_lead">Сеть компьютерных клубов</p>
-                                        <p class="runa-subline" data-i18n="runa_hero_subline">Премиальный уровень сервиса и комфорта</p>
-                                        <div class="runa-actions">
-                                            <span class="runa-btn runa-btn-cream" data-i18n="runa_hero_btn1">Оставить отзыв</span>
-                                            <span class="runa-btn runa-btn-outline" data-i18n="runa_hero_btn2">Сотрудничество</span>
-                                        </div>
-                                    </div>
-                                    <div class="runa-scroll" aria-hidden="true">
-                                        <div class="runa-scroll-line"></div>
-                                        scroll
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="macbook-base"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project reveal">
-                <div class="project-info">
-                    <div class="project-index"><span data-i18n="us_index">02 / E-Commerce Platform</span> <a href="https://yesus.in" target="_blank" class="project-link">yesus.in</a></div>
-                    <h3 class="project-name"><a href="https://yesus.in" target="_blank" class="project-name-link">US<span>?</span></a></h3>
-                    <p class="project-category" data-i18n="us_category">Магазин уличной одежды</p>
-                    <p class="project-description" data-i18n="us_desc">Полноценная e-commerce платформа: фронтенд с поддержкой Telegram Web App, админ-панель для управления товарами, API-сервер с аутентификацией и WebSocket чатами поддержки.</p>
-                    <div class="project-features">
-                        <div class="project-feature" data-i18n="us_f1">Next.js 16 + React 19 + TypeScript</div>
-                        <div class="project-feature" data-i18n="us_f2">Telegram Mini App интеграция</div>
-                        <div class="project-feature" data-i18n="us_f3">Fastify + PostgreSQL + Prisma</div>
-                        <div class="project-feature" data-i18n="us_f4">JWT авторизация + WebSocket</div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">Next.js</span>
-                        <span class="project-tag">React</span>
-                        <span class="project-tag">TypeScript</span>
-                        <span class="project-tag">Tailwind</span>
-                        <span class="project-tag">Fastify</span>
-                        <span class="project-tag">PostgreSQL</span>
-                    </div>
-                </div>
-                <div class="project-visual">
-                    
-                    <div class="project-frame">
-                        <div class="iphone-frame">
-                            <div class="iphone-btn-mute"></div>
-                            <div class="iphone-btn-vol-up"></div>
-                            <div class="iphone-btn-vol-down"></div>
-                            <div class="iphone-btn-power"></div>
-                            <div class="iphone-screen">
-                                <div class="us-app" aria-hidden="true">
-                                    <div class="ios-statusbar">
-                                        <span class="ios-status-time">9:41</span>
-                                        <div class="ios-status-right">
-                                            <svg class="ios-status-signal" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-                                            <svg class="ios-status-wifi" viewBox="0 0 16 12" fill="currentColor"><path d="M8 9.5a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zm0-3.2c1.5 0 2.9.5 4 1.4l1.3-1.6A7.6 7.6 0 008 4.3c-1.6 0-3.1.5-4.4 1.3L4.9 7.2A6.3 6.3 0 018 6.3zM8 3c2.2 0 4.2.7 5.8 2L15 3.4A10.3 10.3 0 008 1 10.3 10.3 0 001 3.4L2.2 5A9 9 0 018 3z"/></svg>
-                                            <svg class="ios-status-battery" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke="currentColor" stroke-opacity="0.5"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="24" y="3.5" width="2" height="5" rx="1" fill="currentColor" fill-opacity="0.5"/></svg>
-                                        </div>
-                                    </div>
-                                    <div class="us-header">
-                                        <div class="us-header-left">
-                                            <div class="us-logo">US<span class="us-logo-q">?</span></div>
-                                            <div class="us-sub" data-i18n="us_preview_count">21 объект</div>
-                                        </div>
-                                        <div class="us-nav">
-                                            <span class="us-pill us-pill-catalog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg><span data-i18n="us_preview_catalog">Каталог</span></span>
-                                            <span class="us-pill us-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-                                            <span class="us-pill us-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-                                        </div>
-                                    </div>
-                                    <div class="us-grid">
-                                        <div class="us-tile"><img src="assets/img/us-product-1.webp" srcset="assets/img/us-product-1.webp 1x, assets/img/us-product-1@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Ветровка C.P. Company</span><span class="us-tile-price">24 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-2.webp" srcset="assets/img/us-product-2.webp 1x, assets/img/us-product-2@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Cвитшот C.P. Company</span><span class="us-tile-price">18 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-3.webp" srcset="assets/img/us-product-3.webp 1x, assets/img/us-product-3@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Свитшот Stone Island</span><span class="us-tile-price">16 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-4.webp" srcset="assets/img/us-product-4.webp 1x, assets/img/us-product-4@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Свитшот Stone Island 2017</span><span class="us-tile-price">19 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-5.webp" srcset="assets/img/us-product-5.webp 1x, assets/img/us-product-5@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Cвитшот C.P. Company 3D</span><span class="us-tile-price">22 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-6.webp" srcset="assets/img/us-product-6.webp 1x, assets/img/us-product-6@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Fear of God</span><span class="us-tile-price">10 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-7.webp" srcset="assets/img/us-product-7.webp 1x, assets/img/us-product-7@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны True Religion</span><span class="us-tile-price">6 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-8.webp" srcset="assets/img/us-product-8.webp 1x, assets/img/us-product-8@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Stone Island</span><span class="us-tile-price">5 000 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-9.webp" srcset="assets/img/us-product-9.webp 1x, assets/img/us-product-9@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Palm Angels</span><span class="us-tile-price">15 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-10.webp" srcset="assets/img/us-product-10.webp 1x, assets/img/us-product-10@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Burberry</span><span class="us-tile-price">14 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-11.webp" srcset="assets/img/us-product-11.webp 1x, assets/img/us-product-11@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты C.P. Company</span><span class="us-tile-price">17 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-12.webp" srcset="assets/img/us-product-12.webp 1x, assets/img/us-product-12@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Stone Island</span><span class="us-tile-price">9 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-13.webp" srcset="assets/img/us-product-13.webp 1x, assets/img/us-product-13@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Stone Island Jr</span><span class="us-tile-price">4 000 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-14.webp" srcset="assets/img/us-product-14.webp 1x, assets/img/us-product-14@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Stone Island</span><span class="us-tile-price">19 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-15.webp" srcset="assets/img/us-product-15.webp 1x, assets/img/us-product-15@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Rick Owens</span><span class="us-tile-price">7 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-16.webp" srcset="assets/img/us-product-16.webp 1x, assets/img/us-product-16@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Evisu</span><span class="us-tile-price">4 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-17.webp" srcset="assets/img/us-product-17.webp 1x, assets/img/us-product-17@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты C.P. Company</span><span class="us-tile-price">11 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-18.webp" srcset="assets/img/us-product-18.webp 1x, assets/img/us-product-18@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты C.P Company</span><span class="us-tile-price">11 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-19.webp" srcset="assets/img/us-product-19.webp 1x, assets/img/us-product-19@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Bape</span><span class="us-tile-price">6 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-20.webp" srcset="assets/img/us-product-20.webp 1x, assets/img/us-product-20@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Bape</span><span class="us-tile-price">9 990 ₽</span></div></div>
-                                        <div class="us-tile"><img src="assets/img/us-product-21.webp" srcset="assets/img/us-product-21.webp 1x, assets/img/us-product-21@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Louis Vuitton</span><span class="us-tile-price">9 990 ₽</span></div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="project project--feature reveal">
-                <div class="project-info">
-                    <div class="project-index"><span data-i18n="slither_index">03 / Multiplayer Browser Game</span> <a href="https://slithercash.fun" target="_blank" class="project-link">slithercash.fun</a></div>
-                    <h3 class="project-name"><a href="https://slithercash.fun" target="_blank" class="project-name-link">Slither<span>Cash</span></a></h3>
-                    <p class="project-category" data-i18n="slither_category">Многопользовательская браузерная игра — Арена и Telegram Mini App</p>
-                    <p class="project-description" data-i18n="slither_desc">Многопользовательская браузерная snake-арена в реальном времени с серверной авторитарной физикой (60Hz), клиентским предсказанием и серверной сверкой. Telegram Mini App с tap-механикой, система коллекционных скинов, полная админ-панель и система уведомлений.</p>
-                    <div class="project-features">
-                        <div class="project-feature" data-i18n="slither_f1">Реалтайм мультиплеер — Socket.IO, 60Hz физика</div>
-                        <div class="project-feature" data-i18n="slither_f2">Client-side prediction + server reconciliation</div>
-                        <div class="project-feature" data-i18n="slither_f3">Telegram Mini App с tap-to-earn механикой</div>
-                        <div class="project-feature" data-i18n="slither_f4">Админ-панель, скины, уведомления, тикеты</div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">Next.js</span>
-                        <span class="project-tag">TypeScript</span>
-                        <span class="project-tag">Socket.IO</span>
-                        <span class="project-tag">Node.js</span>
-                        <span class="project-tag">PostgreSQL</span>
-                        <span class="project-tag">Prisma</span>
-                        <span class="project-tag">Canvas</span>
-                    </div>
-                </div>
-                <div class="project-visual">
-                    
-                    <div class="project-frame">
-                        <div class="macbook-frame">
-                            <div class="macbook-screen">
-                                <div class="macbook-display">
-                                    <canvas class="live-snakes" aria-hidden="true" data-snakes="slither"></canvas>
-                                    <div class="slither-bg" aria-hidden="true">
-                                        <div class="slither-aurora slither-aurora-tl"></div>
-                                        <div class="slither-aurora slither-aurora-br"></div>
-                                        <div class="slither-grid"></div>
-                                        <div class="slither-vignette"></div>
-                                    </div>
-                                    <div class="slither-ui">
-                                        <nav class="slither-nav">
-                                            <div class="slither-nav-logo"><span class="s-w">SLITHER</span><span class="s-g">CASH</span><span class="s-e">.FUN</span></div>
-                                            <div class="slither-nav-right">
-                                                <span class="s-navlink" data-i18n="slither_nav_play">Play</span>
-                                                <span class="s-navlink" data-i18n="slither_nav_leaderboard">Leaderboard</span>
-                                                <span class="s-navlink" data-i18n="slither_nav_howto">How to Play</span>
-                                                <span class="s-navlink" data-i18n="slither_nav_rules">Rules</span>
-                                                <span class="s-auth" data-i18n="slither_nav_auth">Auth</span>
-                                            </div>
-                                        </nav>
-                                        <div class="slither-hero">
-                                            <div class="slither-logo-big">
-                                                <span class="s-w">SLITHER</span><br>
-                                                <span class="s-w">CASH</span><span class="s-e">.FUN</span>
-                                            </div>
-                                            <div class="slither-tagline">Stake. Slither. Survive. Cashout.</div>
-                                            <div class="slither-desc" data-i18n="slither_hero_desc">The crypto arena where only the strongest survive. Make your stake, control your snake, and secure your earnings.</div>
-                                            <div class="slither-actions">
-                                                <span class="s-btn s-btn-primary" data-i18n="slither_hero_play">▶ Play Now</span>
-                                                <span class="s-btn s-btn-ghost" data-i18n="slither_hero_demo">Try Demo</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="macbook-base"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project reveal">
-                <div class="project-info">
-                    <div class="project-index"><span data-i18n="vpn_index">04 / Telegram VPN Bot</span> <a href="https://t.me/rknspotter_bot" target="_blank" class="project-link">t.me/rknspotter_bot</a></div>
-                    <h3 class="project-name"><a href="https://t.me/rknspotter_bot" target="_blank" class="project-name-link">RKN Spotter<span> VPN</span></a></h3>
-                    <p class="project-category" data-i18n="vpn_category">Telegram VPN Bot</p>
-                    <p class="project-description" data-i18n="vpn_desc">VPN-доступ в один клик через Telegram-бота. Протокол VLESS + Reality для обхода DPI, сплит-туннелинг для российских сайтов, автоматическое управление серверами и оплата криптовалютой.</p>
-                    <div class="project-features">
-                        <div class="project-feature" data-i18n="vpn_f1">VLESS + Reality протокол (невидим для DPI)</div>
-                        <div class="project-feature" data-i18n="vpn_f2">Сплит-туннелинг (российские сайты напрямую)</div>
-                        <div class="project-feature" data-i18n="vpn_f3">Пул серверов с автопровижинингом</div>
-                        <div class="project-feature" data-i18n="vpn_f4">Криптоплатежи через CryptoBot</div>
-                    </div>
-                    <div class="project-tags">
-                        <span class="project-tag">Python</span>
-                        <span class="project-tag">FastAPI</span>
-                        <span class="project-tag">Aiogram 3</span>
-                        <span class="project-tag">Xray-core</span>
-                        <span class="project-tag">SQLite</span>
-                    </div>
-                </div>
-                <div class="project-visual">
-                    
-                    <div class="project-frame">
-                        <div class="iphone-frame">
-                            <div class="iphone-btn-mute"></div>
-                            <div class="iphone-btn-vol-up"></div>
-                            <div class="iphone-btn-vol-down"></div>
-                            <div class="iphone-btn-power"></div>
-                            <div class="iphone-screen">
-                                <div class="vpn-chat" aria-hidden="true">
-                                    <div class="ios-statusbar ios-statusbar-vpn">
-                                        <span class="ios-status-time">9:41</span>
-                                        <div class="ios-status-right">
-                                            <svg class="ios-status-signal" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
-                                            <svg class="ios-status-wifi" viewBox="0 0 16 12" fill="currentColor"><path d="M8 9.5a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zm0-3.2c1.5 0 2.9.5 4 1.4l1.3-1.6A7.6 7.6 0 008 4.3c-1.6 0-3.1.5-4.4 1.3L4.9 7.2A6.3 6.3 0 018 6.3zM8 3c2.2 0 4.2.7 5.8 2L15 3.4A10.3 10.3 0 008 1 10.3 10.3 0 001 3.4L2.2 5A9 9 0 018 3z"/></svg>
-                                            <svg class="ios-status-battery" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke="currentColor" stroke-opacity="0.5"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="24" y="3.5" width="2" height="5" rx="1" fill="currentColor" fill-opacity="0.5"/></svg>
-                                        </div>
-                                    </div>
-                                    <div class="vpn-topbar">
-                                        <span class="vpn-back" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                                        </span>
-                                        <div class="vpn-avatar" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" fill="rgba(255,255,255,0.18)"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
-                                        </div>
-                                        <div class="vpn-topbar-info">
-                                            <div class="vpn-bot-name">RKN Spotter VPN</div>
-                                            <div class="vpn-bot-status">bot</div>
-                                        </div>
-                                        <span class="vpn-menu" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
-                                        </span>
-                                    </div>
-                                    <div class="vpn-messages">
-                                        <div class="vpn-msg">
-                                            <div class="vpn-msg-media">
-                                                <img class="vpn-msg-photo" src="assets/img/vpn-banner.webp" alt="" loading="lazy" width="736" height="736">
-                                                <div class="vpn-msg-time">12:04</div>
-                                            </div>
-                                            <div class="vpn-msg-caption">
-                                                <span class="vpn-msg-greeting" data-i18n="vpn_preview_hi">👋 Привет, друг!</span>
-                                                <span class="vpn-msg-sub" data-i18n="vpn_preview_choose">Выберите пункт в меню ниже.</span>
-                                            </div>
-                                            <div class="vpn-keyboard" aria-hidden="true">
-                                                <span class="vpn-btn">🎁 <span data-i18n="vpn_preview_trial">Пробный период</span></span>
-                                                <span class="vpn-btn">👤 <span data-i18n="vpn_preview_profile">Профиль</span></span>
-                                                <span class="vpn-btn">💳 <span data-i18n="vpn_preview_buy">Купить</span></span>
-                                                <span class="vpn-btn">👥 <span data-i18n="vpn_preview_invite">Пригласить</span></span>
-                                                <span class="vpn-btn">📢 <span data-i18n="vpn_preview_channel">Канал</span></span>
-                                                <span class="vpn-btn">❓ <span data-i18n="vpn_preview_help">Как пользоваться</span></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="vpn-inputbar">
-                                        <div class="vpn-input">
-                                            <span class="vpn-attach" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></span>
-                                            <span class="vpn-input-field" data-i18n="vpn_preview_input">Сообщение</span>
-                                            <span class="vpn-mic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.9V21a1 1 0 1 0 2 0v-3.1A7 7 0 0 0 19 11z"/></svg></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <ul class="project-list">
+                <li class="reveal">
+                    <button class="project-row" type="button" data-project="runa" aria-haspopup="dialog">
+                        <span class="row-index">01</span>
+                        <span class="row-main">
+                            <span class="row-name">RUNA</span>
+                            <span class="row-category" data-i18n="runa_category">Сеть киберклубов — Конфигуратор и CRM</span>
+                        </span>
+                        <span class="row-stack" aria-hidden="true">
+                            <span class="row-tag">FastAPI</span>
+                            <span class="row-tag">React</span>
+                            <span class="row-tag">Aiogram</span>
+                        </span>
+                        <span class="row-cue">
+                            <span class="row-open" data-i18n="row_open">Открыть</span>
+                            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                    </button>
+                </li>
+                <li class="reveal">
+                    <button class="project-row" type="button" data-project="us" aria-haspopup="dialog">
+                        <span class="row-index">02</span>
+                        <span class="row-main">
+                            <span class="row-name">US<span class="row-name-q">?</span></span>
+                            <span class="row-category" data-i18n="us_category">Магазин уличной одежды</span>
+                        </span>
+                        <span class="row-stack" aria-hidden="true">
+                            <span class="row-tag">Next.js</span>
+                            <span class="row-tag">Fastify</span>
+                            <span class="row-tag">PostgreSQL</span>
+                        </span>
+                        <span class="row-cue">
+                            <span class="row-open" data-i18n="row_open">Открыть</span>
+                            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                    </button>
+                </li>
+                <li class="reveal">
+                    <button class="project-row" type="button" data-project="slither" aria-haspopup="dialog">
+                        <span class="row-index">03</span>
+                        <span class="row-main">
+                            <span class="row-name">Slither<span class="row-name-accent">Cash</span></span>
+                            <span class="row-category" data-i18n="slither_category">Многопользовательская браузерная игра — Арена и Telegram Mini App</span>
+                        </span>
+                        <span class="row-stack" aria-hidden="true">
+                            <span class="row-tag">TypeScript</span>
+                            <span class="row-tag">Socket.IO</span>
+                            <span class="row-tag">Prisma</span>
+                        </span>
+                        <span class="row-cue">
+                            <span class="row-open" data-i18n="row_open">Открыть</span>
+                            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                    </button>
+                </li>
+                <li class="reveal">
+                    <button class="project-row" type="button" data-project="vpn" aria-haspopup="dialog">
+                        <span class="row-index">04</span>
+                        <span class="row-main">
+                            <span class="row-name">RKN Spotter<span class="row-name-accent"> VPN</span></span>
+                            <span class="row-category" data-i18n="vpn_category">Telegram VPN Bot</span>
+                        </span>
+                        <span class="row-stack" aria-hidden="true">
+                            <span class="row-tag">Python</span>
+                            <span class="row-tag">Xray-core</span>
+                            <span class="row-tag">aiogram 3</span>
+                        </span>
+                        <span class="row-cue">
+                            <span class="row-open" data-i18n="row_open">Открыть</span>
+                            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </span>
+                    </button>
+                </li>
+            </ul>
         </div>
     </section>
 
@@ -503,15 +288,366 @@
     </main>
 
     <footer>
+        <div class="footer-watermark" aria-hidden="true">473studio</div>
         <div class="container">
-            <div class="footer-text"><span data-i18n="footer_copy">2026 473studio</span></div>
-            <div class="footer-links">
-                <a href="https://t.me/sadmillionaire" target="_blank" data-i18n="footer_tg">Telegram</a>
-                <a href="mailto:permoscow@icloud.com">Email</a>
-                <a href="https://github.com/napalen0" target="_blank">GitHub</a>
+            <div class="footer-bottom">
+                <div class="footer-copy"><span data-i18n="footer_copy">2026 473studio</span></div>
+                <div class="footer-links">
+                    <a href="https://t.me/sadmillionaire" target="_blank" rel="noopener" class="footer-link">
+                        <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.015-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.139-5.062 3.345-.479.329-.913.489-1.302.481-.428-.009-1.252-.242-1.865-.442-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.015 3.333-1.386 4.025-1.627 4.477-1.635.099-.002.321.023.465.141.121.1.154.234.169.333.016.098.035.323.02.498z"/></svg>
+                        <span data-i18n="footer_tg">Telegram</span>
+                    </a>
+                    <a href="mailto:permoscow@icloud.com" class="footer-link">
+                        <svg class="footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+                        <span>Email</span>
+                    </a>
+                    <a href="https://github.com/napalen0" target="_blank" rel="noopener" class="footer-link">
+                        <svg class="footer-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        <span>GitHub</span>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
+
+    <!-- ── Project detail modal (App Store-style): one panel per project, only the
+         active one shown. Left = live device mockup, right = full write-up. ── -->
+    <div class="pm" id="projectModal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="pm-backdrop" data-close></div>
+        <div class="pm-dialog" role="document">
+            <button class="pm-close" type="button" data-close aria-label="Закрыть">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="pm-body">
+
+                <!-- 01 · RUNA -->
+                <article class="pm-panel" data-panel="runa" hidden>
+                    <div class="pm-visual pm-visual-macbook">
+                        <div class="macbook-frame">
+                            <div class="macbook-screen">
+                                <div class="macbook-display">
+                                    <video class="runa-video" muted loop playsinline preload="metadata" aria-hidden="true">
+                                        <source src="assets/media/runa-hero.mp4" type="video/mp4">
+                                    </video>
+                                    <div class="runa-overlay" aria-hidden="true"></div>
+                                    <div class="runa-lines" aria-hidden="true"></div>
+                                    <div class="runa-content">
+                                        <p class="runa-eyebrow" data-i18n="runa_hero_eyebrow">8 локаций · 4 города</p>
+                                        <div class="runa-logo" role="img" aria-label="RUNA"></div>
+                                        <div class="runa-divider"></div>
+                                        <p class="runa-lead" data-i18n="runa_hero_lead">Сеть компьютерных клубов</p>
+                                        <p class="runa-subline" data-i18n="runa_hero_subline">Премиальный уровень сервиса и комфорта</p>
+                                        <div class="runa-actions">
+                                            <span class="runa-btn runa-btn-cream" data-i18n="runa_hero_btn1">Оставить отзыв</span>
+                                            <span class="runa-btn runa-btn-outline" data-i18n="runa_hero_btn2">Сотрудничество</span>
+                                        </div>
+                                    </div>
+                                    <div class="runa-scroll" aria-hidden="true">
+                                        <div class="runa-scroll-line"></div>
+                                        scroll
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="macbook-base"></div>
+                        </div>
+                    </div>
+                    <div class="pm-info">
+                        <div class="pm-head">
+                            <div class="pm-eyebrow" data-i18n="runa_index">01 / Cyber Club Platform</div>
+                            <h3 class="pm-name">RUNA</h3>
+                            <p class="pm-category" data-i18n="runa_category">Сеть киберклубов — Конфигуратор и CRM</p>
+                        </div>
+                        <div class="pm-scroll">
+                            <p class="pm-desc" data-i18n="runa_desc">Платформа для сети компьютерных клубов с интерактивным конфигуратором игровых зон. Выбор комплектации ПК, мониторов, периферии для каждой локации. Система сбора заявок на франшизу и Telegram-бот для отзывов.</p>
+                            <div class="pm-features">
+                                <div class="pm-feature" data-i18n="runa_f1">Конфигуратор зон для 8+ локаций</div>
+                                <div class="pm-feature" data-i18n="runa_f2">Система заявок на франшизу</div>
+                                <div class="pm-feature" data-i18n="runa_f3">Telegram-бот для обратной связи</div>
+                                <div class="pm-feature" data-i18n="runa_f4">FastAPI + React фронтенд</div>
+                            </div>
+                            <div class="pm-tags">
+                                <span class="pm-tag">Python</span>
+                                <span class="pm-tag">FastAPI</span>
+                                <span class="pm-tag">Aiogram 3</span>
+                                <span class="pm-tag">React</span>
+                                <span class="pm-tag">SQLite</span>
+                            </div>
+                            <div class="pm-actions">
+                                <a class="pm-cta" href="https://runavrn.ru" target="_blank" rel="noopener">
+                                    <span data-i18n="modal_visit">Перейти на сайт</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 02 · US? -->
+                <article class="pm-panel" data-panel="us" hidden>
+                    <div class="pm-visual pm-visual-iphone">
+                        <div class="iphone-frame">
+                            <div class="iphone-btn-mute"></div>
+                            <div class="iphone-btn-vol-up"></div>
+                            <div class="iphone-btn-vol-down"></div>
+                            <div class="iphone-btn-power"></div>
+                            <div class="iphone-screen">
+                                <div class="us-app" aria-hidden="true">
+                                    <div class="ios-statusbar">
+                                        <span class="ios-status-time">9:41</span>
+                                        <div class="ios-status-right">
+                                            <svg class="ios-status-signal" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                                            <svg class="ios-status-wifi" viewBox="0 0 16 12" fill="currentColor"><path d="M8 9.5a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zm0-3.2c1.5 0 2.9.5 4 1.4l1.3-1.6A7.6 7.6 0 008 4.3c-1.6 0-3.1.5-4.4 1.3L4.9 7.2A6.3 6.3 0 018 6.3zM8 3c2.2 0 4.2.7 5.8 2L15 3.4A10.3 10.3 0 008 1 10.3 10.3 0 001 3.4L2.2 5A9 9 0 018 3z"/></svg>
+                                            <svg class="ios-status-battery" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke="currentColor" stroke-opacity="0.5"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="24" y="3.5" width="2" height="5" rx="1" fill="currentColor" fill-opacity="0.5"/></svg>
+                                        </div>
+                                    </div>
+                                    <div class="us-header">
+                                        <div class="us-header-left">
+                                            <div class="us-logo">US<span class="us-logo-q">?</span></div>
+                                            <div class="us-sub" data-i18n="us_preview_count">21 объект</div>
+                                        </div>
+                                        <div class="us-nav">
+                                            <span class="us-pill us-pill-catalog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg><span data-i18n="us_preview_catalog">Каталог</span></span>
+                                            <span class="us-pill us-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                                            <span class="us-pill us-pill-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+                                        </div>
+                                    </div>
+                                    <div class="us-grid">
+                                        <div class="us-tile"><img src="assets/img/us-product-1.webp" srcset="assets/img/us-product-1.webp 1x, assets/img/us-product-1@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Ветровка C.P. Company</span><span class="us-tile-price">24 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-2.webp" srcset="assets/img/us-product-2.webp 1x, assets/img/us-product-2@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Cвитшот C.P. Company</span><span class="us-tile-price">18 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-3.webp" srcset="assets/img/us-product-3.webp 1x, assets/img/us-product-3@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Свитшот Stone Island</span><span class="us-tile-price">16 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-4.webp" srcset="assets/img/us-product-4.webp 1x, assets/img/us-product-4@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Свитшот Stone Island 2017</span><span class="us-tile-price">19 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-5.webp" srcset="assets/img/us-product-5.webp 1x, assets/img/us-product-5@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Cвитшот C.P. Company 3D</span><span class="us-tile-price">22 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-6.webp" srcset="assets/img/us-product-6.webp 1x, assets/img/us-product-6@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Fear of God</span><span class="us-tile-price">10 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-7.webp" srcset="assets/img/us-product-7.webp 1x, assets/img/us-product-7@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны True Religion</span><span class="us-tile-price">6 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-8.webp" srcset="assets/img/us-product-8.webp 1x, assets/img/us-product-8@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Stone Island</span><span class="us-tile-price">5 000 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-9.webp" srcset="assets/img/us-product-9.webp 1x, assets/img/us-product-9@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Palm Angels</span><span class="us-tile-price">15 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-10.webp" srcset="assets/img/us-product-10.webp 1x, assets/img/us-product-10@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Burberry</span><span class="us-tile-price">14 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-11.webp" srcset="assets/img/us-product-11.webp 1x, assets/img/us-product-11@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты C.P. Company</span><span class="us-tile-price">17 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-12.webp" srcset="assets/img/us-product-12.webp 1x, assets/img/us-product-12@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Stone Island</span><span class="us-tile-price">9 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-13.webp" srcset="assets/img/us-product-13.webp 1x, assets/img/us-product-13@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Stone Island Jr</span><span class="us-tile-price">4 000 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-14.webp" srcset="assets/img/us-product-14.webp 1x, assets/img/us-product-14@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Stone Island</span><span class="us-tile-price">19 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-15.webp" srcset="assets/img/us-product-15.webp 1x, assets/img/us-product-15@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Rick Owens</span><span class="us-tile-price">7 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-16.webp" srcset="assets/img/us-product-16.webp 1x, assets/img/us-product-16@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Evisu</span><span class="us-tile-price">4 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-17.webp" srcset="assets/img/us-product-17.webp 1x, assets/img/us-product-17@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты C.P. Company</span><span class="us-tile-price">11 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-18.webp" srcset="assets/img/us-product-18.webp 1x, assets/img/us-product-18@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты C.P Company</span><span class="us-tile-price">11 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-19.webp" srcset="assets/img/us-product-19.webp 1x, assets/img/us-product-19@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Bape</span><span class="us-tile-price">6 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-20.webp" srcset="assets/img/us-product-20.webp 1x, assets/img/us-product-20@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Шорты Bape</span><span class="us-tile-price">9 990 ₽</span></div></div>
+                                        <div class="us-tile"><img src="assets/img/us-product-21.webp" srcset="assets/img/us-product-21.webp 1x, assets/img/us-product-21@2x.webp 2x" alt="" loading="lazy"><div class="us-tile-info"><span class="us-tile-name">Штаны Louis Vuitton</span><span class="us-tile-price">9 990 ₽</span></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pm-info">
+                        <div class="pm-head">
+                            <div class="pm-eyebrow" data-i18n="us_index">02 / E-Commerce Platform</div>
+                            <h3 class="pm-name">US<span class="pm-name-q">?</span></h3>
+                            <p class="pm-category" data-i18n="us_category">Магазин уличной одежды</p>
+                        </div>
+                        <div class="pm-scroll">
+                            <p class="pm-desc" data-i18n="us_desc">Полноценная e-commerce платформа: фронтенд с поддержкой Telegram Web App, админ-панель для управления товарами, API-сервер с аутентификацией и WebSocket чатами поддержки.</p>
+                            <div class="pm-features">
+                                <div class="pm-feature" data-i18n="us_f1">Next.js 16 + React 19 + TypeScript</div>
+                                <div class="pm-feature" data-i18n="us_f2">Telegram Mini App интеграция</div>
+                                <div class="pm-feature" data-i18n="us_f3">Fastify + PostgreSQL + Prisma</div>
+                                <div class="pm-feature" data-i18n="us_f4">JWT авторизация + WebSocket</div>
+                            </div>
+                            <div class="pm-tags">
+                                <span class="pm-tag">Next.js</span>
+                                <span class="pm-tag">React</span>
+                                <span class="pm-tag">TypeScript</span>
+                                <span class="pm-tag">Tailwind</span>
+                                <span class="pm-tag">Fastify</span>
+                                <span class="pm-tag">PostgreSQL</span>
+                            </div>
+                            <div class="pm-actions">
+                                <a class="pm-cta" href="https://yesus.in" target="_blank" rel="noopener">
+                                    <span data-i18n="modal_visit">Перейти на сайт</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 03 · SlitherCash -->
+                <article class="pm-panel" data-panel="slither" hidden>
+                    <div class="pm-visual pm-visual-macbook">
+                        <div class="macbook-frame">
+                            <div class="macbook-screen">
+                                <div class="macbook-display">
+                                    <canvas class="live-snakes" aria-hidden="true" data-snakes="slither"></canvas>
+                                    <div class="slither-bg" aria-hidden="true">
+                                        <div class="slither-aurora slither-aurora-tl"></div>
+                                        <div class="slither-aurora slither-aurora-br"></div>
+                                        <div class="slither-grid"></div>
+                                        <div class="slither-vignette"></div>
+                                    </div>
+                                    <div class="slither-ui">
+                                        <nav class="slither-nav">
+                                            <div class="slither-nav-logo"><span class="s-w">SLITHER</span><span class="s-g">CASH</span><span class="s-e">.FUN</span></div>
+                                            <div class="slither-nav-right">
+                                                <span class="s-navlink" data-i18n="slither_nav_play">Play</span>
+                                                <span class="s-navlink" data-i18n="slither_nav_leaderboard">Leaderboard</span>
+                                                <span class="s-navlink" data-i18n="slither_nav_howto">How to Play</span>
+                                                <span class="s-navlink" data-i18n="slither_nav_rules">Rules</span>
+                                                <span class="s-auth" data-i18n="slither_nav_auth">Auth</span>
+                                            </div>
+                                        </nav>
+                                        <div class="slither-hero">
+                                            <div class="slither-logo-big">
+                                                <span class="s-w">SLITHER</span><br>
+                                                <span class="s-w">CASH</span><span class="s-e">.FUN</span>
+                                            </div>
+                                            <div class="slither-tagline">Stake. Slither. Survive. Cashout.</div>
+                                            <div class="slither-desc" data-i18n="slither_hero_desc">The crypto arena where only the strongest survive. Make your stake, control your snake, and secure your earnings.</div>
+                                            <div class="slither-actions">
+                                                <span class="s-btn s-btn-primary" data-i18n="slither_hero_play">▶ Play Now</span>
+                                                <span class="s-btn s-btn-ghost" data-i18n="slither_hero_demo">Try Demo</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="macbook-base"></div>
+                        </div>
+                    </div>
+                    <div class="pm-info">
+                        <div class="pm-head">
+                            <div class="pm-eyebrow" data-i18n="slither_index">03 / Multiplayer Browser Game</div>
+                            <h3 class="pm-name">Slither<span class="pm-name-accent">Cash</span></h3>
+                            <p class="pm-category" data-i18n="slither_category">Многопользовательская браузерная игра — Арена и Telegram Mini App</p>
+                        </div>
+                        <div class="pm-scroll">
+                            <p class="pm-desc" data-i18n="slither_desc">Многопользовательская браузерная snake-арена в реальном времени с серверной авторитарной физикой (60Hz), клиентским предсказанием и серверной сверкой. Telegram Mini App с tap-механикой, система коллекционных скинов, полная админ-панель и система уведомлений.</p>
+                            <div class="pm-features">
+                                <div class="pm-feature" data-i18n="slither_f1">Реалтайм мультиплеер — Socket.IO, 60Hz физика</div>
+                                <div class="pm-feature" data-i18n="slither_f2">Client-side prediction + server reconciliation</div>
+                                <div class="pm-feature" data-i18n="slither_f3">Telegram Mini App с tap-to-earn механикой</div>
+                                <div class="pm-feature" data-i18n="slither_f4">Админ-панель, скины, уведомления, тикеты</div>
+                            </div>
+                            <div class="pm-tags">
+                                <span class="pm-tag">Next.js</span>
+                                <span class="pm-tag">TypeScript</span>
+                                <span class="pm-tag">Socket.IO</span>
+                                <span class="pm-tag">Node.js</span>
+                                <span class="pm-tag">PostgreSQL</span>
+                                <span class="pm-tag">Prisma</span>
+                                <span class="pm-tag">Canvas</span>
+                            </div>
+                            <div class="pm-actions">
+                                <a class="pm-cta" href="https://slithercash.fun" target="_blank" rel="noopener">
+                                    <span data-i18n="modal_visit">Перейти на сайт</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- 04 · RKN Spotter VPN -->
+                <article class="pm-panel" data-panel="vpn" hidden>
+                    <div class="pm-visual pm-visual-iphone">
+                        <div class="iphone-frame">
+                            <div class="iphone-btn-mute"></div>
+                            <div class="iphone-btn-vol-up"></div>
+                            <div class="iphone-btn-vol-down"></div>
+                            <div class="iphone-btn-power"></div>
+                            <div class="iphone-screen">
+                                <div class="vpn-chat" aria-hidden="true">
+                                    <div class="ios-statusbar ios-statusbar-vpn">
+                                        <span class="ios-status-time">9:41</span>
+                                        <div class="ios-status-right">
+                                            <svg class="ios-status-signal" viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5" width="3" height="7" rx="1"/><rect x="10" y="2.5" width="3" height="9.5" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                                            <svg class="ios-status-wifi" viewBox="0 0 16 12" fill="currentColor"><path d="M8 9.5a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zm0-3.2c1.5 0 2.9.5 4 1.4l1.3-1.6A7.6 7.6 0 008 4.3c-1.6 0-3.1.5-4.4 1.3L4.9 7.2A6.3 6.3 0 018 6.3zM8 3c2.2 0 4.2.7 5.8 2L15 3.4A10.3 10.3 0 008 1 10.3 10.3 0 001 3.4L2.2 5A9 9 0 018 3z"/></svg>
+                                            <svg class="ios-status-battery" viewBox="0 0 26 12" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="3" stroke="currentColor" stroke-opacity="0.5"/><rect x="2" y="2" width="19" height="8" rx="1.5" fill="currentColor"/><rect x="24" y="3.5" width="2" height="5" rx="1" fill="currentColor" fill-opacity="0.5"/></svg>
+                                        </div>
+                                    </div>
+                                    <div class="vpn-topbar">
+                                        <span class="vpn-back" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                                        </span>
+                                        <div class="vpn-avatar" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 8.5-8 11-4.5-2.5-8-6-8-11V5l8-3z" fill="rgba(255,255,255,0.18)"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>
+                                        </div>
+                                        <div class="vpn-topbar-info">
+                                            <div class="vpn-bot-name">RKN Spotter VPN</div>
+                                            <div class="vpn-bot-status">bot</div>
+                                        </div>
+                                        <span class="vpn-menu" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/></svg>
+                                        </span>
+                                    </div>
+                                    <div class="vpn-messages">
+                                        <div class="vpn-msg">
+                                            <div class="vpn-msg-media">
+                                                <img class="vpn-msg-photo" src="assets/img/vpn-banner.webp" alt="" loading="lazy" width="736" height="736">
+                                                <div class="vpn-msg-time">12:04</div>
+                                            </div>
+                                            <div class="vpn-msg-caption">
+                                                <span class="vpn-msg-greeting" data-i18n="vpn_preview_hi">👋 Привет, друг!</span>
+                                                <span class="vpn-msg-sub" data-i18n="vpn_preview_choose">Выберите пункт в меню ниже.</span>
+                                            </div>
+                                            <div class="vpn-keyboard" aria-hidden="true">
+                                                <span class="vpn-btn">🎁 <span data-i18n="vpn_preview_trial">Пробный период</span></span>
+                                                <span class="vpn-btn">👤 <span data-i18n="vpn_preview_profile">Профиль</span></span>
+                                                <span class="vpn-btn">💳 <span data-i18n="vpn_preview_buy">Купить</span></span>
+                                                <span class="vpn-btn">👥 <span data-i18n="vpn_preview_invite">Пригласить</span></span>
+                                                <span class="vpn-btn">📢 <span data-i18n="vpn_preview_channel">Канал</span></span>
+                                                <span class="vpn-btn">❓ <span data-i18n="vpn_preview_help">Как пользоваться</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="vpn-inputbar">
+                                        <div class="vpn-input">
+                                            <span class="vpn-attach" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></span>
+                                            <span class="vpn-input-field" data-i18n="vpn_preview_input">Сообщение</span>
+                                            <span class="vpn-mic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3z"/><path d="M19 11a1 1 0 1 0-2 0 5 5 0 0 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.9V21a1 1 0 1 0 2 0v-3.1A7 7 0 0 0 19 11z"/></svg></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pm-info">
+                        <div class="pm-head">
+                            <div class="pm-eyebrow" data-i18n="vpn_index">04 / Telegram VPN Bot</div>
+                            <h3 class="pm-name">RKN Spotter<span class="pm-name-accent"> VPN</span></h3>
+                            <p class="pm-category" data-i18n="vpn_category">Telegram VPN Bot</p>
+                        </div>
+                        <div class="pm-scroll">
+                            <p class="pm-desc" data-i18n="vpn_desc">VPN-доступ в один клик через Telegram-бота. Протокол VLESS + Reality для обхода DPI, сплит-туннелинг для российских сайтов, автоматическое управление серверами и оплата криптовалютой.</p>
+                            <div class="pm-features">
+                                <div class="pm-feature" data-i18n="vpn_f1">VLESS + Reality протокол (невидим для DPI)</div>
+                                <div class="pm-feature" data-i18n="vpn_f2">Сплит-туннелинг (российские сайты напрямую)</div>
+                                <div class="pm-feature" data-i18n="vpn_f3">Пул серверов с автопровижинингом</div>
+                                <div class="pm-feature" data-i18n="vpn_f4">Криптоплатежи через CryptoBot</div>
+                            </div>
+                            <div class="pm-tags">
+                                <span class="pm-tag">Python</span>
+                                <span class="pm-tag">FastAPI</span>
+                                <span class="pm-tag">Aiogram 3</span>
+                                <span class="pm-tag">Xray-core</span>
+                                <span class="pm-tag">SQLite</span>
+                            </div>
+                            <div class="pm-actions">
+                                <a class="pm-cta" href="https://t.me/rknspotter_bot" target="_blank" rel="noopener">
+                                    <span data-i18n="modal_visit">Перейти на сайт</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
+                                <a class="pm-cta pm-cta-ghost" href="https://github.com/napalen0/vpn-bot" target="_blank" rel="noopener">
+                                    <span data-i18n="modal_source">Исходный код</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </div>
+
     <script src="assets/js/translations.js"></script>
     <script src="assets/js/main.js"></script>
 </body>

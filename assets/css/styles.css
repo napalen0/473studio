@@ -20,6 +20,10 @@
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
     --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
     --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+    /* Modal */
+    --modal-bg: rgba(12, 12, 12, 0.92);
+    --modal-card: #1a1a1a;
+    --modal-border: #2a2a2a;
 }
 
 [data-theme="light"] {
@@ -34,6 +38,9 @@
     --accent-hover: #000;
     --link: #4a5562;
     --link-hover: #1a1a1a;
+    --modal-bg: rgba(245, 245, 245, 0.92);
+    --modal-card: #ffffff;
+    --modal-border: #e2e2e2;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -48,15 +55,6 @@ body {
     overflow-x: hidden;
 }
 
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    opacity: 0.03;
-    pointer-events: none;
-    z-index: 9999;
-}
 
 .container {
     max-width: 1400px;
@@ -312,10 +310,9 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     inset: 0;
     background:
         radial-gradient(ellipse 65% 50% at 50% 18%, rgba(184, 196, 208, 0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(0, 0, 0, 0.5) 0%, transparent 60%),
-        radial-gradient(rgba(184, 196, 208, 0.05) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 38px 38px;
-    background-position: center, center, center;
+        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
+    background-size: 100% 100%, 100% 100%;
+    background-position: center, center;
     -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%);
     mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 80%);
     pointer-events: none;
@@ -323,9 +320,8 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 [data-theme="light"] .hero-bg {
     background:
         radial-gradient(ellipse 65% 50% at 50% 18%, rgba(120, 140, 160, 0.08) 0%, transparent 55%),
-        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
-        radial-gradient(rgba(60, 80, 100, 0.06) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 38px 38px;
+        radial-gradient(ellipse 120% 80% at 50% 120%, rgba(255, 255, 255, 0.6) 0%, transparent 60%);
+    background-size: 100% 100%, 100% 100%;
 }
 
 .hero-content { position: relative; z-index: 1; }
@@ -397,91 +393,366 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     color: var(--text-secondary);
     max-width: 500px;
     line-height: 1.7;
-    margin-bottom: 3rem;
+    margin-bottom: 0;
 }
-
-.hero-meta {
-    display: flex;
-    gap: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
-}
-
-.meta-item { display: flex; flex-direction: column; gap: 0.25rem; }
-.meta-value {
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums; /* fixed-width digits so the number ticker doesn't jitter */
-}
-.meta-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* Projects */
 .projects { padding: 4rem 0; }
 .section-header { margin-bottom: 3rem; }
 .section-label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1rem; }
 .section-title { font-family: 'Newsreader', Georgia, serif; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 500; letter-spacing: -0.02em; }
+.section-hint { margin-top: 1rem; font-size: 0.9rem; color: var(--text-muted); }
 
-.project {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    padding: 5rem 0;
+/* ── Project list — a typographic index, not tiles. Each row is a full-width
+   button that opens the App-Store-style detail modal. Live device mockups live
+   inside the modal, so the list itself stays quiet: number, name, category,
+   stack, and an "open" cue that animates on hover/focus. ── */
+.project-list {
+    list-style: none;
     border-top: 1px solid var(--border);
 }
-.project:last-child { border-bottom: 1px solid var(--border); }
-/* Alternate text/visual side per row — even rows show the visual on the left */
-.project:nth-child(even) .project-info { order: 2; }
-.project:nth-child(even) .project-visual { order: 1; }
+.project-list > li { border-bottom: 1px solid var(--border); }
 
-/* Variant: feature — asymmetric split (visual dominant). Breaks the 4-row
-   split monotony: rows 1–2 are zigzag 50/50, row 3 leans visual 1.3/1.
-   No panel, no border, no shadow — the asymmetry alone is the rhythm break. */
-.project--feature {
-    grid-template-columns: 1.3fr 1fr;
-    gap: 5rem;
+.project-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    width: 100%;
+    padding: clamp(1.5rem, 3vw, 2.25rem) 0.5rem;
+    background: none;
+    border: none;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+    position: relative;
+    transition: padding-left 0.35s var(--ease-out), background 0.3s var(--ease-out);
 }
-.project--feature .project-info { max-width: none; }
-.project--feature .project-name { font-size: 2.5rem; }
+/* Left accent rail that grows in on hover/focus — the row's "selected" tell. */
+.project-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 0;
+    background: var(--text);
+    transition: height 0.35s var(--ease-out);
+}
 
-.project-info { max-width: 520px; }
-.project-index { font-family: 'DM Sans', monospace; font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-.project-link { font-size: 0.65rem; color: var(--link); text-decoration: none; padding: 0.2rem 0.5rem; border: 1px solid var(--border); border-radius: var(--radius-chip); transition: background 0.2s var(--ease-out), border-color 0.2s var(--ease-out), transform 160ms var(--ease-out); }
-.project-name { font-family: 'Newsreader', Georgia, serif; font-size: 3rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-/* The project title links to the live project — inherit the heading's color so
-   it reads as a title, not a hyperlink, with no underline. */
-.project-name-link { color: inherit; text-decoration: none; }
-.project-category { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.5rem; }
-.project-description { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem; }
+.row-index {
+    font-family: 'DM Sans', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    font-variant-numeric: tabular-nums;
+    transition: color 0.3s var(--ease-out);
+}
+.row-main { min-width: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+.row-name {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    transition: color 0.3s var(--ease-out);
+}
+.row-name-q { color: var(--text-muted); }
+.row-name-accent { color: var(--text-secondary); }
+.row-category {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    max-width: 46ch;
+}
+.row-stack { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; max-width: 260px; }
+.row-tag {
+    font-family: 'DM Sans', monospace;
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-chip);
+    padding: 0.3rem 0.6rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+}
+.row-cue { display: flex; align-items: center; gap: 0.6rem; color: var(--text-muted); }
+.row-open {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+.row-arrow {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: transform 0.35s var(--ease-out), color 0.3s var(--ease-out);
+}
 
-.project-features { display: flex; flex-direction: column; gap: 0.625rem; margin-bottom: 2rem; }
-.project-feature { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; color: var(--text-secondary); }
-.project-feature::before { content: ''; width: 5px; height: 5px; background: var(--text-muted); border-radius: 50%; }
+/* ── Project modal (App Store-style) ────────────────────────────────────────
+   Fixed overlay: dimmed + blurred backdrop, a centered dialog card that scales
+   in. Left = the live device mockup on a lit podium, right = the write-up with a
+   sticky header. Only the active .pm-panel is shown (others are [hidden]).
 
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-.project-tag { font-family: 'DM Sans', monospace; font-size: 0.7rem; font-weight: 600; color: var(--text); background: var(--bg-elevated); padding: 0.375rem 0.75rem; border-radius: var(--radius-chip); border: 1px solid var(--border); letter-spacing: 0.02em; }
+   Each project sets --pm-accent (via JS on .pm-dialog) — its brand colour tints
+   the podium glow, the eyebrow, the CTA, and the feature bullets, so every
+   project's modal feels like its own place rather than one template. ── */
+.pm {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 4vw, 3rem);
+    /* Default accent (neutral steel) until a project overrides it. */
+    --pm-accent: 184, 196, 208;
+}
+.pm.is-open { display: flex; }
 
-.project-visual { position: relative; }
+.pm-backdrop {
+    position: absolute;
+    inset: 0;
+    background: var(--modal-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    opacity: 0;
+    transition: opacity 0.36s var(--ease-out);
+}
+/* A soft edge-vignette on the backdrop so the dialog reads as lifted off the
+   page, not floating on flat blur. */
+.pm-backdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, transparent 40%, rgba(0,0,0,0.35) 100%);
+    pointer-events: none;
+}
+.pm.is-open .pm-backdrop { opacity: 1; }
 
-.project-frame {
+.pm-dialog {
     position: relative;
     z-index: 1;
+    width: min(1040px, 100%);
+    max-height: min(88vh, 760px);
+    background: var(--modal-card);
+    border: 1px solid var(--modal-border);
+    border-radius: 24px;
+    box-shadow:
+        0 40px 90px -30px rgba(0, 0, 0, 0.7),
+        0 12px 30px -15px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    padding: 2rem;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+    transition: opacity 0.36s var(--ease-out), transform 0.5s var(--ease-drawer);
 }
+.pm.is-open .pm-dialog { opacity: 1; transform: none; }
 
-.project-screenshot {
-    width: 100%;
-    border-radius: 4px;
+.pm-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    z-index: 5;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-pill);
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out), transform 220ms var(--ease-out);
+}
+.pm-close svg { width: 18px; height: 18px; transition: transform 0.3s var(--ease-out); }
+
+/* Desktop: the body doesn't scroll — the panel fills it and the info column
+   scrolls internally (mockup stays put). Mobile overrides flip this so the whole
+   sheet scrolls as one. */
+.pm-body { flex: 1 1 auto; min-height: 0; overflow: hidden; }
+
+.pm-panel {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    min-height: 0;
+    height: 100%;
+    align-items: stretch;
+}
+.pm-panel[hidden] { display: none; }
+
+/* Left column: the device mockup on a lit podium. The accent glow sits behind
+   the device; a soft radial "shadow" grounds it so it stands rather than hangs. */
+.pm-visual {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2rem, 4vw, 3.5rem);
+    background:
+        radial-gradient(ellipse 78% 62% at 50% 32%, rgba(var(--pm-accent), 0.12) 0%, transparent 62%),
+        var(--bg);
+    border-right: 1px solid var(--border);
     overflow: hidden;
 }
-
-.project-screenshot img {
-    width: 100%;
-    display: block;
+/* Grounding shadow under the device — a blurred ellipse on the podium floor. */
+.pm-visual::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: clamp(1.4rem, 4vw, 2.6rem);
+    width: 62%;
+    height: 42px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.45) 0%, transparent 70%);
+    filter: blur(6px);
+    pointer-events: none;
+    z-index: 0;
 }
+[data-theme="light"] .pm-visual::after {
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 0%, transparent 70%);
+}
+/* The device rides above the grounding shadow, and animates in after the card. */
+.pm-visual .macbook-frame,
+.pm-visual .iphone-frame { position: relative; z-index: 1; }
+.pm-visual-iphone .iphone-frame { transform: scale(1.02); }
+.pm-visual .macbook-frame { max-width: 460px; }
+
+/* Right column: sticky header + independently scrolling write-up. */
+.pm-info {
+    position: relative;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+/* Sticky header: eyebrow + name + category pinned atop the scrolling write-up.
+   The fade-to-transparent bottom edge ensures long descriptions read into the
+   scroll area without a hard cut. */
+.pm-head {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    padding: clamp(2rem, 4vw, 3.25rem) clamp(2rem, 4vw, 3.25rem) 1.25rem;
+    background: linear-gradient(to bottom, var(--modal-card) 72%, transparent);
+    flex-shrink: 0;
+}
+.pm-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 0 clamp(2rem, 4vw, 3.25rem) clamp(2rem, 4vw, 3.25rem);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.pm-eyebrow {
+    font-family: 'DM Sans', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: rgb(var(--pm-accent));
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+}
+.pm-name {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+.pm-name-q { color: var(--text-muted); }
+.pm-name-accent { color: var(--text-secondary); }
+.pm-category { font-size: 0.9rem; color: var(--text-muted); }
+.pm-desc { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin: 0.5rem 0 2rem; }
+
+.pm-features { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 2rem; }
+.pm-feature { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+.pm-feature::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    margin-top: 0.5rem;
+    background: rgb(var(--pm-accent));
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.85;
+}
+
+.pm-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.25rem; }
+.pm-tag {
+    font-family: 'DM Sans', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--bg-elevated);
+    padding: 0.375rem 0.75rem;
+    border-radius: var(--radius-chip);
+    border: 1px solid var(--border);
+    letter-spacing: 0.02em;
+}
+
+.pm-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.pm-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--bg);
+    background: rgb(var(--pm-accent));
+    padding: 0.75rem 1.4rem;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    transition: filter 0.2s var(--ease-out), transform 160ms var(--ease-out);
+}
+.pm-cta svg { width: 16px; height: 16px; transition: transform 0.3s var(--ease-out); }
+.pm-cta-ghost {
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--border);
+    box-shadow: none;
+}
+
+/* ── Modal entrance: staggered choreography — card is already in; then the
+   device rises, then the header, then desc / features / tags / actions cascade.
+   Driven by nth-child delays; the whole thing is disabled under reduced motion. */
+@keyframes pm-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+}
+@keyframes pm-device-in {
+    from { opacity: 0; transform: translateY(26px) scale(0.965); }
+    to   { opacity: 1; transform: none; }
+}
+.pm.is-open .pm-visual-iphone .iphone-frame { animation: pm-device-in 0.6s var(--ease-drawer) 0.12s both; }
+.pm.is-open .pm-visual-macbook .macbook-frame { animation: pm-device-in 0.6s var(--ease-drawer) 0.12s both; }
+/* iphone keeps its 1.02 scale end-state — animate a dedicated variant. */
+@keyframes pm-device-in-iphone {
+    from { opacity: 0; transform: translateY(26px) scale(0.985); }
+    to   { opacity: 1; transform: scale(1.02); }
+}
+.pm.is-open .pm-visual-iphone .iphone-frame { animation-name: pm-device-in-iphone; }
+.pm.is-open .pm-head { animation: pm-rise 0.5s var(--ease-out) 0.16s both; }
+.pm.is-open .pm-desc { animation: pm-rise 0.5s var(--ease-out) 0.22s both; }
+.pm.is-open .pm-features { animation: pm-rise 0.5s var(--ease-out) 0.28s both; }
+.pm.is-open .pm-tags { animation: pm-rise 0.5s var(--ease-out) 0.34s both; }
+.pm.is-open .pm-actions { animation: pm-rise 0.5s var(--ease-out) 0.4s both; }
 
 /* iPhone 14 Pro - Realistic Mockup */
 .iphone-frame {
@@ -1358,15 +1629,8 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, transparent 100%);
 }
 
-/* Front lip */
-.macbook-lip {
-    width: 100%;
-    max-width: 560px;
-    height: 3px;
-    background: linear-gradient(180deg, #1f1f1f 0%, #181818 100%);
-    border-radius: 0 0 4px 4px;
-    margin-top: -1px;
-}
+/* ── Dead-code cleanup ─────────────────────────────────────────────────────── */
+.macbook-lip { display: none; }  /* defined at line 1365, no HTML counterpart */
 
 /* Services */
 .services { padding: 8rem 0; background: var(--bg-elevated); }
@@ -1416,10 +1680,9 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
     inset: 0;
     background:
         radial-gradient(ellipse 65% 50% at 50% 82%, rgba(184, 196, 208, 0.07) 0%, transparent 55%),
-        radial-gradient(ellipse 120% 80% at 50% -20%, rgba(0, 0, 0, 0.5) 0%, transparent 60%),
-        radial-gradient(rgba(184, 196, 208, 0.05) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 38px 38px;
-    background-position: center, center, center;
+        radial-gradient(ellipse 120% 80% at 50% -20%, rgba(0, 0, 0, 0.5) 0%, transparent 60%);
+    background-size: 100% 100%, 100% 100%;
+    background-position: center, center;
     -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 60%, #000 30%, transparent 80%);
     mask-image: radial-gradient(ellipse 90% 70% at 50% 60%, #000 30%, transparent 80%);
     pointer-events: none;
@@ -1427,9 +1690,8 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 [data-theme="light"] .cta::before {
     background:
         radial-gradient(ellipse 65% 50% at 50% 82%, rgba(120, 140, 160, 0.08) 0%, transparent 55%),
-        radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255, 255, 255, 0.6) 0%, transparent 60%),
-        radial-gradient(rgba(60, 80, 100, 0.06) 1px, transparent 1px);
-    background-size: 100% 100%, 100% 100%, 38px 38px;
+        radial-gradient(ellipse 120% 80% at 50% -20%, rgba(255, 255, 255, 0.6) 0%, transparent 60%);
+    background-size: 100% 100%, 100% 100%;
 }
 .cta-content { position: relative; z-index: 1; }
 .cta h2 { font-family: 'Newsreader', Georgia, serif; font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 500; letter-spacing: -0.02em; margin-bottom: 1rem; }
@@ -1466,12 +1728,76 @@ a, button, .lang-selector, .lang-opt, .theme-toggle, .nav-link, .header-cta, .te
 .cta-btn-email.is-copied { background: var(--bg-elevated); border-color: var(--accent); color: var(--accent); }
 .cta-btn-email.is-copied:hover { color: var(--accent); }
 
-/* Footer */
-footer { padding: 2rem 0; border-top: 1px solid var(--border); }
-footer .container { display: flex; justify-content: space-between; align-items: center; }
-.footer-text { font-size: 0.85rem; color: var(--text-muted); }
-.footer-links { display: flex; gap: 2rem; }
-.footer-links a { font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; }
+/* Footer — left-aligned, watermark peeking from the left edge. */
+footer {
+    position: relative;
+    padding: 3rem 0;
+    border-top: 1px solid var(--border);
+    overflow: hidden;
+}
+/* Big outlined "473studio" — sits behind, anchored left. */
+.footer-watermark {
+    position: absolute;
+    bottom: -0.08em;
+    left: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(4.5rem, 13vw, 11rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--border);
+    text-stroke: 1px var(--border);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.55;
+}
+[data-theme="light"] .footer-watermark {
+    -webkit-text-stroke-color: #d4d4d4;
+}
+footer .container {
+    position: relative;
+    z-index: 1;
+}
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+.footer-copy {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: -0.01em;
+}
+.footer-links {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+.footer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-input);
+    transition: color 0.2s var(--ease-out), background 0.2s var(--ease-out);
+}
+.footer-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: opacity 0.2s var(--ease-out);
+}
 
 /* ── Hover interactions: gated to real pointers (touch devices fire sticky false-hovers on tap) ── */
 @media (hover: hover) and (pointer: fine) {
@@ -1484,21 +1810,52 @@ footer .container { display: flex; justify-content: space-between; align-items: 
     .theme-toggle:hover { color: #ededed; border-color: #888; background: rgba(255,255,255,0.05); }
     [data-theme="light"] .theme-toggle:hover { color: #1a1a1a; border-color: #999; }
     .header-cta:hover { background: var(--accent-hover); }
-    .project-link:hover { background: rgba(184, 196, 208, 0.08); border-color: var(--text-muted); }
     .tech-item:hover { border-color: var(--text-muted); background: var(--bg-card); }
     .cta-btn:hover { background: var(--accent); color: var(--bg); }
     .footer-links a:hover { color: var(--text); }
+    .footer-link:hover { background: var(--bg-elevated); }
+    .footer-link:hover .footer-icon { opacity: 1; }
+
+    /* Project row: rail grows, row indents, "Открыть" fades in, arrow slides. */
+    .project-row:hover { background: var(--bg-elevated); padding-left: 1.25rem; }
+    .project-row:hover::before { height: 60%; }
+    .project-row:hover .row-index { color: var(--text-secondary); }
+    .project-row:hover .row-name { color: var(--accent-hover); }
+    .project-row:hover .row-open { opacity: 1; transform: none; }
+    .project-row:hover .row-arrow { transform: translateX(4px); color: var(--text); }
+
+    .pm-close:hover { background: var(--bg-elevated); color: var(--text); }
+    .pm-close:hover svg { transform: rotate(90deg); }
+    /* Solid CTA: subtle brightness on hover, no glow intensification. */
+    .pm-cta:hover { filter: brightness(1.06); }
+    .pm-cta:hover svg { transform: translate(2px, -2px); }
+    .pm-cta-ghost:hover { background: var(--bg-elevated); border-color: var(--text-muted); color: var(--text); }
+    .pm-cta-ghost:hover svg { transform: translate(2px, -2px); }
 }
+
+/* Keyboard focus: mirror the hover "selected" state on the row so tab-users get
+   the same affordance (the rail + open cue), plus a visible focus ring. */
+.project-row:focus-visible {
+    outline: none;
+    background: var(--bg-elevated);
+    padding-left: 1.25rem;
+}
+.project-row:focus-visible::before { height: 60%; }
+.project-row:focus-visible .row-name { color: var(--accent-hover); }
+.project-row:focus-visible .row-open { opacity: 1; transform: none; }
+.project-row:focus-visible .row-arrow { transform: translateX(4px); color: var(--text); }
 
 /* ── Press feedback: any pressable element squishes slightly on :active so the UI feels like it's listening. Subtle (0.97), instant-feel via ease-out. ── */
 .header-cta:active,
 .cta-btn:active,
 .theme-toggle:active,
 .lang-opt:active,
-.project-link:active,
-.tech-item:active {
+.tech-item:active,
+.pm-close:active,
+.pm-cta:active {
     transform: scale(0.97);
 }
+.project-row:active { transform: scale(0.995); }
 
 /* ── Scroll reveal: elements enter with a gentle rise+fade as they scroll into view (cascaded by stagger set inline per group). Rare/first-time motion — delight is allowed here. ── */
 .reveal {
@@ -1524,10 +1881,28 @@ footer .container { display: flex; justify-content: space-between; align-items: 
     .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
     /* Press feedback is a tiny scale — drop the transform, keep nothing moving */
     .header-cta:active, .cta-btn:active, .theme-toggle:active,
-    .lang-opt:active, .project-link:active, .tech-item:active { transform: none; }
+    .lang-opt:active, .tech-item:active,
+    .project-row:active, .pm-close:active, .pm-cta:active { transform: none; }
+    /* Project rows: keep color feedback, drop the indent/slide motion */
+    .project-row { transition: background 0.2s !important; }
+    .project-row:hover, .project-row:focus-visible { padding-left: 0.5rem; }
+    .row-arrow, .row-open, .project-row::before { transition: none !important; }
+    /* Modal: appear/disappear with no scale/slide, opacity only. Strip the whole
+       staggered entrance choreography (device rise, header/desc/features cascade). */
+    .pm-dialog { transition: opacity 0.2s !important; transform: none !important; }
+    .pm-backdrop { transition: opacity 0.2s !important; }
+    .pm-panel { animation: none !important; }
+    .pm.is-open .pm-visual-iphone .iphone-frame { animation: none !important; transform: scale(1.02); }
+    .pm.is-open .pm-visual-macbook .macbook-frame,
+    .pm.is-open .pm-head, .pm.is-open .pm-desc, .pm.is-open .pm-features,
+    .pm.is-open .pm-tags, .pm.is-open .pm-actions { animation: none !important; }
+    .pm-close:hover svg, .pm-cta:hover svg, .pm-cta-ghost:hover svg { transform: none; }
     /* Chevron rotation stays — it's a state indicator, not vestibular motion.
        Color/background transitions stay — they aid comprehension without moving anything. */
 }
+
+/* When the modal is open, lock the page behind it from scrolling. */
+body.pm-locked { overflow: hidden; }
 
 /* ── Reduced transparency: users who asked the OS for less translucency get a solid header instead of the blurred glass. ── */
 @media (prefers-reduced-transparency: reduce) {
@@ -1536,7 +1911,6 @@ footer .container { display: flex; justify-content: space-between; align-items: 
 }
 
 @media (max-width: 768px) {
-    .project-features, .project-tags { display: none; }
     .nav-link { display: none; }
 
     [data-theme="light"] header {
@@ -1560,36 +1934,56 @@ footer .container { display: flex; justify-content: space-between; align-items: 
     .theme-toggle svg { width: 14px; height: 14px; }
     .header-cta { padding: 0.45rem 1rem; font-size: 0.8rem; }
 
-    .hero-meta { flex-wrap: wrap; gap: 1.5rem; padding-top: 2rem; }
-
     /* Hero mobile */
     .hero { padding: 6rem 0 4rem; min-height: auto; }
     .hero h1 { font-size: 2.5rem; }
     .hero-description { font-size: 0.95rem; }
 
-    /* Projects - Mobile: single column, mockup on top, fluid (no transform hacks) */
-    .project {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        padding: 2.5rem 0;
+    /* Project list — mobile: drop the stack chips, stack name over category,
+       keep just the arrow cue. Two columns: text + arrow. */
+    .project-row {
+        grid-template-columns: 1fr auto;
+        gap: 1rem;
+        padding: 1.4rem 0.25rem;
     }
-    /* Feature variant collapses to the same centered column on mobile */
-    .project--feature { grid-template-columns: none; gap: 1.5rem; }
-    .project--feature .project-name { font-size: 2rem; }
-    /* Even rows used order-swapping on desktop — on mobile, visual always first */
-    .project:nth-child(even) .project-info { order: 2; }
-    .project:nth-child(even) .project-visual { order: 1; }
-    .project-info { max-width: 100%; order: 2; }
-    .project-visual { order: 1; width: 100%; display: flex; justify-content: center; }
-    .project-frame { padding: 0; width: 100%; max-width: 420px; }
-    /* macbook is already fluid (width:100%, max 560, aspect-ratio) — it just shrinks.
-       iphone is a fixed 210px device mockup — cap it so it doesn't dominate a phone. */
-    .iphone-frame { width: 170px; height: 365px; }
+    .row-index { display: none; }
+    .row-stack { display: none; }
+    .row-open { display: none; }
+    .row-name { font-size: 1.5rem; }
+    .row-category { font-size: 0.82rem; }
+    /* No hover indent on touch; keep the arrow static */
+    .project-row:active { background: var(--bg-elevated); }
 
-    .project-name { font-size: 1.75rem; }
-    .project-category { margin-bottom: 0; }
-    .project-index { margin-bottom: 0.5rem; }
+    /* Modal — mobile: full-height sheet, single column, mockup on top.
+       The sticky-actions bar gets an opaque background so content doesn't
+       bleed through when pinned. */
+    .pm { padding: 0; align-items: stretch; }
+    .pm-dialog {
+        width: 100%;
+        max-height: 100%;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+    }
+    .pm-panel { grid-template-columns: none; height: 100%; }
+    .pm-visual {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 3.5rem 1.5rem 2rem;
+        flex-shrink: 0;
+    }
+    .pm-visual .macbook-frame { max-width: 340px; }
+    .pm-visual-iphone .iphone-frame { transform: scale(0.92); }
+    .pm-info { padding: 0; height: 100%; }
+    .pm-head { padding: 1.75rem 1.5rem 1rem; position: relative; }
+    .pm-scroll { padding: 0 1.5rem 1rem; }
+    /* Actions: flow at the bottom of the scroll content, no sticky hacks.
+       The bar gets a top border to separate from the content above it. */
+    .pm-actions {
+        padding: 1.25rem 0 0;
+        margin-top: 1.5rem !important;
+        border-top: 1px solid var(--border);
+    }
 
     /* Services mobile */
     .services { padding: 3rem 0; }
@@ -1604,9 +1998,13 @@ footer .container { display: flex; justify-content: space-between; align-items: 
     .cta p { font-size: 1rem; margin-bottom: 2rem; }
 }
 
-@media (max-width: 1024px) {
-    nav { display: none; }
-    .hero-meta { flex-wrap: wrap; gap: 2rem; }
+/* Tablet: modal collapses to a single column earlier than the phone breakpoint,
+   so the device mockup + write-up stack instead of cramping side by side. */
+@media (max-width: 900px) and (min-width: 769px) {
+    .pm-panel { grid-template-columns: none; }
+    .pm-visual { border-right: none; border-bottom: 1px solid var(--border); }
+    .pm-dialog { max-height: 92vh; }
+    .row-category { max-width: 32ch; }
 }
 
 /* Mobile header always visible */
